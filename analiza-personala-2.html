@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analiză Numerologică Personală</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d0d0d;
+  --cream: #f5f0e8;
+  --gold: #b8860b;
+  --gold-light: #d4a843;
+  --gold-pale: #f0e0a0;
+  --burgundy: #6b1f2a;
+  --sage: #4a5e52;
+  --warm-gray: #8a7f72;
+  --border: rgba(184,134,11,0.3);
+  --shadow: rgba(13,13,13,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(ellipse at 0% 0%, rgba(184,134,11,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(107,31,42,0.06) 0%, transparent 50%);
+}
+
+/* Decorative corner */
+.page-corner {
+  position: fixed;
+  top: 0; left: 0;
+  width: 120px; height: 120px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  pointer-events: none;
+  z-index: 10;
+}
+.page-corner::after {
+  content: '✦';
+  position: absolute;
+  bottom: 12px; right: 12px;
+  color: var(--gold);
+  font-size: 0.7rem;
+}
+.page-corner-br {
+  position: fixed;
+  bottom: 0; right: 0;
+  width: 120px; height: 120px;
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  pointer-events: none;
+  z-index: 10;
+}
+.page-corner-br::after {
+  content: '✦';
+  position: absolute;
+  top: 12px; left: 12px;
+  color: var(--gold);
+  font-size: 0.7rem;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 32px 100px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.header-ornament {
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.header-sub {
+  color: var(--warm-gray);
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  font-weight: 400;
+}
+
+.header-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+  justify-content: center;
+}
+.header-line::before, .header-line::after {
+  content: '';
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+.header-line::after {
+  background: linear-gradient(to left, transparent, var(--gold));
+}
+.header-line span { color: var(--gold); font-size: 0.8rem; }
+
+/* Input section */
+.input-section {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 40px;
+  margin-bottom: 40px;
+  position: relative;
+  box-shadow: 4px 4px 0 rgba(184,134,11,0.1);
+}
+
+.input-section::before {
+  content: 'DATE ANALIZĂ';
+  position: absolute;
+  top: -10px; left: 28px;
+  background: white;
+  padding: 0 12px;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 600px) {
+  .input-grid { grid-template-columns: 1fr; }
+}
+
+.field-group { display: flex; flex-direction: column; gap: 8px; }
+
+.field-group label {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  font-weight: 600;
+}
+
+.field-group input, .field-group select {
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  padding: 10px 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  color: var(--ink);
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s;
+  font-weight: 400;
+}
+
+.field-group input:focus, .field-group select:focus {
+  border-bottom-color: var(--gold);
+}
+
+.date-row {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr 1.3fr;
+  gap: 12px;
+}
+
+.btn-calculate {
+  width: 100%;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  padding: 18px 32px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-calculate::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.btn-calculate:hover::after { transform: translateX(0); }
+.btn-calculate:hover { color: var(--ink); }
+.btn-calculate span { position: relative; z-index: 1; }
+.btn-calculate:active { transform: scale(0.99); }
+
+/* Results */
+#results { display: none; }
+#results.visible { display: block; animation: fadeIn 0.6s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 32px;
+  background: var(--ink);
+  color: var(--cream);
+  position: relative;
+}
+
+.client-name-display {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-style: italic;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+
+.client-date-display {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: rgba(245,240,232,0.5);
+  text-transform: uppercase;
+}
+
+.results-ornament {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+.results-ornament::before, .results-ornament::after {
+  content: '';
+  width: 60px; height: 1px;
+  background: rgba(184,134,11,0.5);
+}
+.results-ornament span { color: var(--gold); font-size: 0.7rem; }
+
+/* Number card */
+.num-card {
+  border: 1px solid var(--border);
+  margin-bottom: 28px;
+  background: white;
+  box-shadow: 3px 3px 0 rgba(184,134,11,0.08);
+  overflow: hidden;
+}
+
+.num-card-header {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--border);
+}
+
+.num-badge {
+  background: var(--ink);
+  color: var(--gold-light);
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  min-width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  line-height: 1;
+}
+
+.num-header-info {
+  padding: 20px 24px;
+  flex: 1;
+}
+
+.num-category {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.num-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.num-archetype {
+  font-size: 0.85rem;
+  color: var(--warm-gray);
+  font-style: italic;
+}
+
+.num-body { padding: 28px 32px; }
+
+.num-section { margin-bottom: 20px; }
+
+.num-section-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.num-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.num-text {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #333;
+  font-weight: 300;
+}
+
+.num-shadow {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--warm-gray);
+  font-style: italic;
+  padding-left: 16px;
+  border-left: 2px solid var(--burgundy);
+  font-weight: 300;
+}
+
+.traits-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.trait {
+  background: var(--gold-pale);
+  color: var(--gold);
+  border: 1px solid rgba(184,134,11,0.3);
+  padding: 4px 14px;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.trait.dark {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+/* Matrix */
+.matrix-card {
+  border: 1px solid var(--border);
+  margin-bottom: 28px;
+  background: white;
+  box-shadow: 3px 3px 0 rgba(184,134,11,0.08);
+  overflow: hidden;
+}
+
+.matrix-card-header {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.matrix-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.matrix-card-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: rgba(245,240,232,0.5);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.matrix-body { padding: 28px 32px; }
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+
+.matrix-cell {
+  background: white;
+  padding: 16px 12px;
+  text-align: center;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.matrix-cell.has-number {
+  background: #faf7f0;
+}
+
+.matrix-pos {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--warm-gray);
+  text-transform: uppercase;
+}
+
+.matrix-digits {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.matrix-digits.empty {
+  color: #ddd;
+  font-size: 1rem;
+}
+
+.matrix-count {
+  font-size: 0.65rem;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.matrix-meaning-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(184,134,11,0.15);
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.matrix-meaning-item:last-child { border-bottom: none; }
+
+.matrix-num-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  font-weight: 700;
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.matrix-meaning-text {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: #444;
+  font-weight: 300;
+}
+
+.matrix-missing {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: #faf5f5;
+  border-left: 3px solid var(--burgundy);
+}
+
+.matrix-missing-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.matrix-missing-text {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* Year personal */
+.year-card {
+  border: 1px solid var(--border);
+  margin-bottom: 28px;
+  background: white;
+  box-shadow: 3px 3px 0 rgba(184,134,11,0.08);
+  overflow: hidden;
+}
+
+.year-header {
+  background: var(--burgundy);
+  color: var(--cream);
+  padding: 20px 28px;
+}
+
+.year-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #f0c0c8;
+}
+
+.year-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: rgba(245,240,232,0.5);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.year-body { padding: 28px 32px; }
+
+.year-num-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: var(--burgundy);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.year-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+/* Print button */
+.print-btn {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 14px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all 0.3s;
+}
+.print-btn:hover {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+@media print {
+  .input-section, .btn-calculate, .print-btn, .page-corner, .page-corner-br { display: none; }
+  body { background: white; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-corner"></div>
+<div class="page-corner-br"></div>
+
+<div class="container">
+
+  <header>
+    <span class="header-ornament">✦ Analiză Numerologică ✦</span>
+    <h1>Portretul <em>Numeric</em><br>al Sufletului</h1>
+    <p class="header-sub">Analiză personală completă</p>
+    <div class="header-line"><span>✦</span></div>
+  </header>
+
+  <div class="input-section">
+    <div class="input-grid">
+      <div class="field-group" style="grid-column: 1/-1;">
+        <label>Nume complet</label>
+        <input type="text" id="nameInput" placeholder="Prenume și Nume">
+      </div>
+      <div class="field-group" style="grid-column: 1/-1;">
+        <label>Data nașterii</label>
+        <div class="date-row">
+          <select id="dayInput"><option value="">Zi</option></select>
+          <select id="monthInput">
+            <option value="">Lună</option>
+            <option value="01">Ianuarie</option><option value="02">Februarie</option>
+            <option value="03">Martie</option><option value="04">Aprilie</option>
+            <option value="05">Mai</option><option value="06">Iunie</option>
+            <option value="07">Iulie</option><option value="08">August</option>
+            <option value="09">Septembrie</option><option value="10">Octombrie</option>
+            <option value="11">Noiembrie</option><option value="12">Decembrie</option>
+          </select>
+          <select id="yearInput"><option value="">An</option></select>
+        </div>
+      </div>
+    </div>
+    <button class="btn-calculate" onclick="calculate()"><span>Generează Analiza Completă</span></button>
+  </div>
+
+  <div id="results">
+    <div class="results-header">
+      <div class="client-name-display" id="displayName">—</div>
+      <div class="client-date-display" id="displayDate">—</div>
+      <div class="results-ornament"><span>✦ Analiză Completă ✦</span></div>
+    </div>
+
+    <!-- Cifra Destinului -->
+    <div class="num-card" id="cardDestiny">
+      <div class="num-card-header">
+        <div class="num-badge" id="destinyBadge">—</div>
+        <div class="num-header-info">
+          <div class="num-category">Cifra Destinului</div>
+          <div class="num-title" id="destinyTitle">—</div>
+          <div class="num-archetype" id="destinyArchetype">—</div>
+        </div>
+      </div>
+      <div class="num-body">
+        <div class="num-section">
+          <div class="num-section-title">Misiunea Vieții</div>
+          <div class="num-text" id="destinyMission">—</div>
+        </div>
+        <div class="num-section">
+          <div class="num-section-title">Talente & Daruri</div>
+          <div class="num-text" id="destinyTalents">—</div>
+        </div>
+        <div class="num-section">
+          <div class="num-section-title">Lecția Umbrei</div>
+          <div class="num-shadow" id="destinyShadow">—</div>
+        </div>
+        <div class="traits-row" id="destinyTraits"></div>
+      </div>
+    </div>
+
+    <!-- Cifra Numelui -->
+    <div class="num-card" id="cardName">
+      <div class="num-card-header">
+        <div class="num-badge" id="nameBadge">—</div>
+        <div class="num-header-info">
+          <div class="num-category">Cifra Numelui</div>
+          <div class="num-title" id="nameTitle">—</div>
+          <div class="num-archetype" id="nameArchetype">—</div>
+        </div>
+      </div>
+      <div class="num-body">
+        <div class="num-section">
+          <div class="num-section-title">Energia Numelui</div>
+          <div class="num-text" id="nameEnergy">—</div>
+        </div>
+        <div class="num-section">
+          <div class="num-section-title">Cum te percep ceilalți</div>
+          <div class="num-text" id="namePerception">—</div>
+        </div>
+        <div class="num-section">
+          <div class="num-section-title">Provocarea Numelui</div>
+          <div class="num-shadow" id="nameChallenge">—</div>
+        </div>
+        <div class="traits-row" id="nameTraits"></div>
+      </div>
+    </div>
+
+    <!-- Cifra Mintii -->
+    <div class="num-card" id="cardMind">
+      <div class="num-card-header">
+        <div class="num-badge" id="mindBadge">—</div>
+        <div class="num-header-info">
+          <div class="num-category">Cifra Minții — Ziua Nașterii</div>
+          <div class="num-title" id="mindTitle">—</div>
+          <div class="num-archetype" id="mindArchetype">—</div>
+        </div>
+      </div>
+      <div class="num-body">
+        <div class="num-section">
+          <div class="num-section-title">Modul de Gândire</div>
+          <div class="num-text" id="mindThinking">—</div>
+        </div>
+        <div class="num-section">
+          <div class="num-section-title">Talentul Înnăscut</div>
+          <div class="num-text" id="mindTalent">—</div>
+        </div>
+        <div class="traits-row" id="mindTraits"></div>
+      </div>
+    </div>
+
+    <!-- Luna nasterii -->
+    <div class="num-card" id="cardMonth">
+      <div class="num-card-header">
+        <div class="num-badge" id="monthBadge">—</div>
+        <div class="num-header-info">
+          <div class="num-category">Energia Lunii Nașterii</div>
+          <div class="num-title" id="monthTitle">—</div>
+          <div class="num-archetype" id="monthArchetype">—</div>
+        </div>
+      </div>
+      <div class="num-body">
+        <div class="num-section">
+          <div class="num-section-title">Influența Lunii</div>
+          <div class="num-text" id="monthInfluence">—</div>
+        </div>
+        <div class="traits-row" id="monthTraits"></div>
+      </div>
+    </div>
+
+    <!-- Anul Personal -->
+    <div class="year-card">
+      <div class="year-header">
+        <div class="year-title">Anul Personal</div>
+        <div class="year-sub">Energia anului curent</div>
+      </div>
+      <div class="year-body">
+        <div class="year-num-big" id="yearNumBig">—</div>
+        <div class="year-name" id="yearName">—</div>
+        <div class="num-section">
+          <div class="num-section-title">Ce aduce acest an</div>
+          <div class="num-text" id="yearText">—</div>
+        </div>
+        <div class="num-section">
+          <div class="num-section-title">Sfat pentru acest an</div>
+          <div class="num-shadow" id="yearAdvice">—</div>
+        </div>
+        <div class="traits-row" id="yearTraits"></div>
+      </div>
+    </div>
+
+    <!-- Matricea Pitagoreica -->
+    <div class="matrix-card">
+      <div class="matrix-card-header">
+        <div>
+          <div class="matrix-card-title">Matricea Pitagoreică</div>
+          <div class="matrix-card-sub">Harta numerelor din data nașterii</div>
+        </div>
+      </div>
+      <div class="matrix-body">
+        <div class="matrix-grid" id="matrixGrid"></div>
+        <div id="matrixMeanings"></div>
+        <div id="matrixMissing"></div>
+      </div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">✦ Tipărește / Salvează PDF ✦</button>
+  </div>
+
+</div>
+
+<script>
+// Populate selects
+const daySelect = document.getElementById('dayInput');
+for (let d = 1; d <= 31; d++) {
+  const o = document.createElement('option');
+  o.value = String(d).padStart(2,'0');
+  o.textContent = d;
+  daySelect.appendChild(o);
+}
+const yearSelect = document.getElementById('yearInput');
+for (let y = new Date().getFullYear(); y >= 1920; y--) {
+  const o = document.createElement('option');
+  o.value = y; o.textContent = y;
+  yearSelect.appendChild(o);
+}
+
+// ---- DATA ----
+const LETTER_MAP = {
+  A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,
+  J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,
+  S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8,
+  Ă:1,Â:2,Î:3,Ș:1,Ț:2
+};
+
+function reduceNumber(n) {
+  if (n === 11 || n === 22 || n === 33) return n;
+  while (n > 9) {
+    n = String(n).split('').reduce((a,b) => a + Number(b), 0);
+    if (n === 11 || n === 22 || n === 33) return n;
+  }
+  return n;
+}
+
+function getDestiny(dateStr) {
+  const digits = dateStr.replace(/-/g,'').split('').map(Number);
+  return reduceNumber(digits.reduce((a,b) => a+b, 0));
+}
+
+function getNameNumber(name) {
+  const upper = name.toUpperCase().replace(/[^A-ZĂÂÎȘȚ]/g,'');
+  return reduceNumber(upper.split('').reduce((a,l) => a + (LETTER_MAP[l]||0), 0));
+}
+
+function getPersonalYear(day, month, year) {
+  const currentYear = new Date().getFullYear();
+  const sum = String(day).split('').map(Number).reduce((a,b)=>a+b,0)
+    + String(month).split('').map(Number).reduce((a,b)=>a+b,0)
+    + String(currentYear).split('').map(Number).reduce((a,b)=>a+b,0);
+  return reduceNumber(sum);
+}
+
+function buildMatrix(dateStr) {
+  const digits = dateStr.split('').map(Number).filter(d => d > 0);
+  const counts = {};
+  for (let i = 1; i <= 9; i++) counts[i] = 0;
+  digits.forEach(d => { if (d >= 1 && d <= 9) counts[d]++; });
+  return counts;
+}
+
+const DESTINY_DATA = {
+  1: { title:"Pionierul", archetype:"Liderul — Creatorul — Inițiatorul",
+    mission:"Ai venit pe lume cu o misiune clară: să deschizi drumuri noi și să conduci prin exemplu personal. Ești un pionier — forța ta creatoare este extraordinară și ai capacitatea de a transforma viziunile în realitate. Lumea are nevoie de curajul tău de a fi primul, de a îndrăzni acolo unde alții ezită.",
+    talents:"Ai o voință de fier și un simț al identității bine definit. Ești inovator, original și ai energie inepuizabilă când ești pasionat de ceva. Leadership-ul vine natural pentru tine — oamenii te urmează instinctiv. Creativitatea ta este un dar rar și valoros.",
+    shadow:"Umbra ta este egoul și tendința de a domina. Poți deveni inflexibil și incapabil să primești ajutor, crezând că trebuie să faci totul singur. Lecția ta: adevărata forță include și vulnerabilitatea, și colaborarea.",
+    traits:["Leadership","Independență","Curaj","Originalitate","Ambiție","Inovație"] },
+  2: { title:"Diplomatul", archetype:"Mediatorul — Intuitivul — Partenerul",
+    mission:"Ai venit să aduci armonie și echilibru acolo unde există discordie. Misiunea ta este să construiești punți între oameni, să mediezi conflicte și să creezi relații profunde bazate pe înțelegere și empatie. Ești cel care simte ceea ce alții nu pot vedea.",
+    talents:"Intuiția ta este extraordinară — simți energiile celor din jur cu o acuratețe uluitoare. Ești un partener extraordinar, loial și devotat. Ai un dar special pentru muzică, artă și tot ceea ce necesită sensibilitate și finețe.",
+    shadow:"Umbra ta este nesiguranța și dependența emoțională. Tendi să te pierzi în nevoile celorlalți, uitând de propria ta esență. Lecția: tu însuți meriți iubire și atenție — nu ești doar un suport pentru alții.",
+    traits:["Empatie","Intuiție","Diplomație","Răbdare","Sensibilitate","Loialitate"] },
+  3: { title:"Creatorul", archetype:"Artistul — Comunicatorul — Bucuria",
+    mission:"Ai venit să aduci frumusețe, bucurie și inspirație în viața celorlalți. Misiunea ta este să exprimi, să creezi și să comunici — prin cuvinte, artă, muzică sau simpla ta prezență. Ești un purtător de lumină, un animator al spiritului uman.",
+    talents:"Ai un talent extraordinar de comunicare și expresie. Creativitatea ta este debordantă și contagioasă. Ești optimist, charismatic și ai darul de a face oamenii să se simtă bine. Scrisul, vorbitul, arta — toate îți vin natural.",
+    shadow:"Umbra ta este superficialitatea și risipirea energiei în prea multe direcții. Critica te afectează profund, chiar dacă nu arăți. Lecția: concentrează-ți talentele și ai încredere în valoarea creației tale.",
+    traits:["Creativitate","Comunicare","Bucurie","Optimism","Expresivitate","Carisma"] },
+  4: { title:"Constructorul", archetype:"Stabilul — Muncitorul — Fundamentul",
+    mission:"Ai venit să construiești structuri durabile — fie că vorbim de o familie, o carieră, o afacere sau un sistem de valori. Misiunea ta este să creezi temelii solide pe care ceilalți se pot baza. Ești ancora și stabilitatea lumii tale.",
+    talents:"Disciplina și perseverența ta sunt legendare. Ești de încredere, metodic și ai o rezistență interioară care îi uimește pe cei din jur. Acolo unde alții renunță, tu continui. Ai un talent special pentru organizare și planificare.",
+    shadow:"Umbra ta este rigiditatea și teama de schimbare. Poți deveni atât de atașat de rutine și control încât pierzi spontaneitatea vieții. Lecția: și haosul poate fi o formă de creație — lasă uneori viața să te surprindă.",
+    traits:["Disciplină","Stabilitate","Loialitate","Perseverență","Practicism","Seriozitate"] },
+  5: { title:"Exploratorul", archetype:"Libertatea — Aventuristul — Schimbarea",
+    mission:"Ai venit să explorezi, să experimentezi și să trăiești viața la intensitate maximă. Misiunea ta este să aduci schimbare și să deschizi minți — ale tale și ale celorlalți. Ești un catalizator al transformării, un suflet care nu poate fi ținut în loc.",
+    talents:"Adaptabilitatea ta este extraordinară — te descurci în orice situație, cu orice om, în orice context. Ești versatil, inteligent și ai o curiozitate insatiabilă. Comunicarea, vânzările, călătoriile, jurnalismul — toate te definesc.",
+    shadow:"Umbra ta este impulsivitatea și fuga de angajament și profunzime. Nevoia de libertate poate deveni o formă de evitare. Lecția: rădăcinile și aripile pot coexista — poți fi liber și în același timp profund.",
+    traits:["Libertate","Aventură","Adaptabilitate","Curiozitate","Dinamism","Versatilitate"] },
+  6: { title:"Vindecătorul", archetype:"Îngrijitorul — Iubirea — Armonia",
+    mission:"Ai venit să vindeci, să îngrijești și să aduci frumusețe în lume. Misiunea ta este să creezi armonie în familie, comunitate și inimile celor pe care îi atingi. Casa ta este un sanctuar, iar iubirea ta — un dar rar.",
+    talents:"Compasiunea ta este fără margini. Ai un talent natural pentru îngrijire, consiliere și creare de frumos. Simțul estetic tău este rafinat, iar dragostea pentru familie și comunitate — profundă. Ești un vindecător înnăscut.",
+    shadow:"Umbra ta este sacrificiul de sine excesiv și controlul camuflat în grijă. Poți deveni martir sau poți încerca să controlezi pe cei pe care îi iubești. Lecția: îngrijește fără să te pierzi pe tine — și iubește fără să posezi.",
+    traits:["Iubire","Compasiune","Armonie","Responsabilitate","Frumusețe","Devotament"] },
+  7: { title:"Misticul", archetype:"Înțeleptul — Căutătorul — Solitudinea",
+    mission:"Ai venit să cauti adevărul dincolo de aparențe și să aduci înțelepciune în lume. Misiunea ta este să cercetezi, să înțelegi și să transmiți cunoaștere profundă. Ești un punte între lumea văzută și cea nevăzută.",
+    talents:"Mintea ta analitică este extraordinară — poți pătrunde în esența oricărei probleme. Ai o intuiție profundă și o conexiune naturală cu spiritualul. Solitudinea nu te înspăimântă — te reîncarcă. Știința, filozofia, spiritualitatea — toate sunt terenul tău.",
+    shadow:"Umbra ta este izolarea și cinismul. Poți deveni distant, critic și incapabil să te bucuri de simplul cotidian. Lecția: deschide inima la fel de mult cum deschizi mintea — și lasă oamenii să te atingă.",
+    traits:["Înțelepciune","Spiritualitate","Analiză","Intuiție","Profunzime","Cercetare"] },
+  8: { title:"Maestrul Puterii", archetype:"Autoritatea — Abundența — Karma",
+    mission:"Ai venit să înveți și să predai lecțiile puterii, abundenței și responsabilității. Misiunea ta este să construiești imperii — materiale sau spirituale — și să gestionezi resursele cu integritate. Ești un canal al abundenței divine.",
+    talents:"Ai o înțelegere instinctivă a puterii și a modului în care funcționează lumea. Ești un vizionar, un strateg și un lider care poate manifesta abundența. Când ești în aliniament, tot ce atingi se transformă în aur.",
+    shadow:"Umbra ta este obsesia pentru putere și material, și tendința de a controla. Cifra 8 aduce și cele mai grele lecții karmice. Lecția: puterea adevărată vine din integritate, nu din control — dă înainte ca să primești.",
+    traits:["Putere","Abundență","Autoritate","Determinare","Viziune","Strategie"] },
+  9: { title:"Înțeleptul Universal", archetype:"Compasiunea — Finalul — Transcendența",
+    mission:"Ai venit cu un suflet vechi și o misiune enormă: să servești, să vindeci și să ridici umanitatea. Ești un umanist profund care simte durerea lumii ca pe a sa proprie. Compasiunea ta este fără margini, iar talentele tale — multiple.",
+    talents:"Ai trecut prin toate energiile de la 1 la 8 și acum ești chemat să dai înapoi. Creativitatea, înțelepciunea și empatia ta sunt excepționale. Ești un artist al sufletului, un vindecător, un mentor — oriunde mergi, laşi o amprentă.",
+    shadow:"Umbra ta este dificultatea de a lăsa să plece — persoane, situații, identități vechi. Poți purta povara lumii pe umeri până la epuizare. Lecția cea mai profundă: arta eliberării — dă drumul cu grație la tot ce și-a trăit menirea.",
+    traits:["Compasiune","Înțelepciune","Altruism","Creativitate","Transcendență","Vindecare"] },
+  11: { title:"Mesagerul Luminii", archetype:"Număr Maestru — Inspirație Divină",
+    mission:"11 este un număr maestru — energia inspirației divine și a iluminării. Ai venit să fii un canal al luminii, să inspiri masele și să aduci mesaje de la un nivel superior de conștiință. Misiunea ta este enormă și responsabilitatea pe măsură.",
+    talents:"Intuiția ta este de nivel psihic — simți și percepi dincolo de ceea ce vede ochiul uman. Ai un dar extraordinar de a inspira și de a ridica pe ceilalți. Ești o punte între spiritual și material.",
+    shadow:"Provocarea este anxietatea și presiunea enormă a propriei misiuni. Poți oscila între stări extreme. Lecția: înainte să salvezi lumea, învață să te salvezi pe tine.",
+    traits:["Inspirație","Intuiție psihică","Viziune","Iluminare","Sensibilitate profundă"] },
+  22: { title:"Constructorul Maestru", archetype:"Număr Maestru — Manifestare la Scară Mare",
+    mission:"22 este cel mai puternic număr din numerologie — energia constructorului maestru. Ai venit să construiești structuri care vor rezista generații — în orice domeniu alegi. Potențialul tău de manifestare este aproape nelimitat.",
+    talents:"Combini visul cu practica — poți vizualiza și concretiza proiecte de amploare. Ești un lider vizionar cu picioarele pe pământ. Ceea ce construiești are valoare și rezistență în timp.",
+    shadow:"Presiunea propriei misiuni poate fi paralizantă. Poți autosabota din teamă de eșec. Lecția: începe mic, dar gândește mare — și ai răbdare cu procesul.",
+    traits:["Manifestare","Viziune practică","Construcție la scară mare","Leadership","Rezistență"] },
+  33: { title:"Maestrul Iubirii", archetype:"Număr Maestru — Iubire Necondiționată",
+    mission:"33 este numărul iubirii neconditionate și al vindecării universale. Ai venit să fie un exemplu viu al compasiunii divine și să ridici conștiința colectivă prin iubire.",
+    talents:"Capacitatea ta de a iubi și de a vindeca este extraordinară. Ești un profesor spiritual, un vindecător și un far de lumină pentru cei din jur.",
+    shadow:"Tendința de sacrificiu extrem poate duce la epuizare. Lecția: iubește și pe tine la fel de mult cum iubești pe ceilalți.",
+    traits:["Iubire necondiționată","Vindecare","Compasiune divină","Înțelepciune","Lumină"] }
+};
+
+const MONTH_DATA = {
+  1:{name:"Ianuarie",archetype:"Luna Capricornului — Ambiție și Structură",influence:"Energia lui Ianuarie îți oferă o determinare de oțel și o capacitate remarcabilă de a construi sisteme durabile. Ești ambițios, disciplinat și ai un simț al responsabilității foarte dezvoltat. Răbdarea ta este un dar rar.",traits:["Ambiție","Disciplină","Răbdare","Responsabilitate"]},
+  2:{name:"Februarie",archetype:"Luna Vărsătorului — Inovație și Viziune",influence:"Energia lui Februarie îți dă o minte inovatoare și o perspectivă unică asupra lumii. Ești un vizionar, un umanist și un gânditor independent. Ai venit cu idei revoluționare înaintea timpului tău.",traits:["Inovație","Viziune","Independență","Umanism"]},
+  3:{name:"Martie",archetype:"Luna Peștilor — Intuiție și Sensibilitate",influence:"Energia lui Martie îți amplifică intuiția și sensibilitatea la dimensiunile invizibile ale realității. Ești profund empatic, artistic și conectat la un nivel superior de conștiință. Visele tale sunt mesaje.",traits:["Intuiție","Sensibilitate","Empatie","Creativitate"]},
+  4:{name:"Aprilie",archetype:"Luna Berbecului — Curaj și Inițiativă",influence:"Energia lui Aprilie îți oferă un curaj pioneer și o energie de inițiere extraordinară. Ești primul care îndrăznește, primul care acționează. Forța ta de voință este aproape imbatabilă.",traits:["Curaj","Inițiativă","Energie","Pionierism"]},
+  5:{name:"Mai",archetype:"Luna Taurului — Stabilitate și Frumusețe",influence:"Energia lui Mai îți oferă un simț estetic rafinat și o nevoie profundă de stabilitate și securitate. Apreciezi frumusețea în toate formele ei și ai o conexiune specială cu natura și cu lumea materială.",traits:["Stabilitate","Estetică","Fidelitate","Senzorialitate"]},
+  6:{name:"Iunie",archetype:"Luna Gemenilor — Comunicare și Dualitate",influence:"Energia lui Iunie îți dă o minte agilă, un talent extraordinar de comunicare și o curiozitate insatiabilă. Ești versatil, inteligent și poți înțelege mai multe perspective simultan. Cuvintele sunt unealta ta.",traits:["Comunicare","Inteligență","Versatilitate","Curiozitate"]},
+  7:{name:"Iulie",archetype:"Luna Racului — Profunzime Emoțională",influence:"Energia lui Iulie îți amplifică profunzimea emoțională și instinctul protector. Ești profund atașat de familie și de rădăcini. Memoria ta emoțională este extraordinară — nu uiți niciodată cum te-a făcut cineva să te simți.",traits:["Emoție","Familie","Intuiție","Protecție"]},
+  8:{name:"August",archetype:"Luna Leului — Putere și Strălucire",influence:"Energia lui August îți oferă o prezență magnetică și o generozitate regală. Ești un lider natural care inspiră prin simpla sa prezență. Ai o nevoie autentică de a fi văzut și recunoscut — și meriți asta.",traits:["Magnetism","Generozitate","Leadership","Strălucire"]},
+  9:{name:"Septembrie",archetype:"Luna Fecioarei — Analiză și Perfecțiune",influence:"Energia lui Septembrie îți oferă o minte analitică excepțională și standarde înalte pentru tine și pentru lume. Ești metodic, atent la detalii și ai o dorinţă profundă de a fi util și de a face bine.",traits:["Analiză","Precizie","Perfecționism","Utilitate"]},
+  10:{name:"Octombrie",archetype:"Luna Balanței — Echilibru și Armonie",influence:"Energia lui Octombrie îți oferă un simț înnăscut al dreptății și al echilibrului. Ești un diplomat natural, un mediator și un iubitor al frumuseții sub toate formele ei. Relațiile sunt teritoriul tău sacru.",traits:["Echilibru","Dreptate","Armonie","Diplomație"]},
+  11:{name:"Noiembrie",archetype:"Luna Scorpionului — Transformare și Mister",influence:"Energia lui Noiembrie îți oferă o intensitate rară și o capacitate de transformare profundă. Mergi acolo unde alții nu îndrăznesc să privească. Ești un alchimist al sufletului — transformi durerea în putere.",traits:["Intensitate","Transformare","Mister","Putere"]},
+  12:{name:"Decembrie",archetype:"Luna Săgetătorului — Viziune și Libertate",influence:"Energia lui Decembrie îți oferă o viziune largă asupra vieții și o sete de cunoaștere fără limite. Ești optimist, filosof și iubești libertatea în toate formele ei. Orizont ul tău este mereu mai departe.",traits:["Înțelepciune","Optimism","Libertate","Viziune"]}
+};
+
+const MIND_DATA = {
+  1:{title:"Mintea Pionierului",archetype:"Gânditor independent și inovator",thinking:"Mintea ta funcționează în mod liniar și direct — știi ce vrei și știi cum să ajungi acolo. Gândești strategic, independent și ai soluții originale acolo unde alții văd probleme.",talent:"Leadership natural și capacitatea de a iniția proiecte din nimic",traits:["Gândire independentă","Inovație","Strategie","Claritate"]},
+  2:{title:"Mintea Intuitivului",archetype:"Gânditor empatic și receptiv",thinking:"Mintea ta este profund intuitivă și receptivă la subtilitățile din jur. Procesezi informațiile emoțional, simți înainte să analizezi. Ai o memorie emoțională extraordinară.",talent:"Empatie profundă și capacitatea de a simți ceea ce nu se spune",traits:["Intuiție","Empatie","Receptivitate","Sensibilitate"]},
+  3:{title:"Mintea Creatorului",archetype:"Gânditor creativ și expresiv",thinking:"Mintea ta este un caleidoscop de idei și asocieri creative. Gândești în imagini, metafore și povești. Comunicarea este teritoriul tău natural — exprimi cu ușurință ceea ce alții nu pot articula.",talent:"Creativitate debordantă și comunicare naturală",traits:["Creativitate","Expresivitate","Imaginație","Comunicare"]},
+  4:{title:"Mintea Constructorului",archetype:"Gânditor sistematic și practic",thinking:"Mintea ta este organizată, metodică și practică. Procesezi informațiile pas cu pas, creând structuri logice și sisteme eficiente. Ești cel care transformă visele în planuri concrete.",talent:"Organizare și capacitatea de a construi sisteme durabile",traits:["Sistematic","Practic","Organizat","Logic"]},
+  5:{title:"Mintea Exploratorului",archetype:"Gânditor adaptabil și curios",thinking:"Mintea ta este agilă, curioasă și în permanentă mișcare. Asimilezi informații rapid și faci conexiuni neașteptate între domenii diferite. Ești un gânditor multidimensional.",talent:"Adaptabilitate extraordinară și conexiuni creative între domenii",traits:["Agilitate","Curiozitate","Adaptabilitate","Versatilitate"]},
+  6:{title:"Mintea Îngrijitorului",archetype:"Gânditor empatic și responsabil",thinking:"Mintea ta gândește în termeni de relații, responsabilitate și armonie. Deciziile tale sunt filtrate prin întrebarea: este asta bine pentru toți? Ai o înțelepciune emoțională rară.",talent:"Înțelepciune emoțională și capacitatea de a crea armonie",traits:["Responsabilitate","Empatie","Armonie","Grijă"]},
+  7:{title:"Mintea Cercetătorului",archetype:"Gânditor analitic și spiritual",thinking:"Mintea ta funcționează la adâncimi pe care puțini le pot accesa. Ești un gânditor profund care caută adevărul dincolo de suprafață. Singurătatea este necesară pentru procesarea informațiilor.",talent:"Analiză profundă și capacitatea de a vedea dincolo de aparențe",traits:["Profunzime","Analiză","Spiritualitate","Cercetare"]},
+  8:{title:"Mintea Strategului",archetype:"Gânditor vizionar și pragmatic",thinking:"Mintea ta gândește la scară mare — strategii, sisteme, rezultate pe termen lung. Ești un vizionar cu picioarele pe pământ, capabil să transforme viziunile în realitate concretă.",talent:"Gândire strategică și capacitatea de a manifesta abundența",traits:["Viziune","Strategie","Pragmatism","Putere"]},
+  9:{title:"Mintea Înțeleptului",archetype:"Gânditor universal și compasiv",thinking:"Mintea ta are o perspectivă cosmică — gândești în termeni de umanitate, nu de individ. Ești profund compasiv, înțelept și capabil să sintetizezi diverse sisteme de cunoaștere.",talent:"Înțelepciune universală și capacitatea de a inspira masele",traits:["Înțelepciune","Compasiune","Universalitate","Sinteză"]}
+};
+
+const PERSONAL_YEAR_DATA = {
+  1:{name:"Anul Noilor Începuturi",text:"Acesta este un an de inițiere și plantare de semințe. Este momentul perfect pentru a lansa noi proiecte, a face schimbări majore și a-ți afirma independența. Energia acestui an te împinge spre acțiune și curaj.",advice:"Acționează! Nu mai amâna. Semințele plantate acum vor da roade în ciclul următor de 9 ani. Fii curajos și pune-ți planurile în mișcare.",traits:["Nou început","Curaj","Inițiativă","Independență"]},
+  2:{name:"Anul Relațiilor și Răbdării",text:"Acesta este un an mai lent, dedicat construirii de relații, colaborărilor și răbdării. Nu este momentul pentru acțiuni agresive, ci pentru a cultiva conexiunile deja existente.",advice:"Fii răbdător și diplomeat. Colaborează, nu lupta. Relațiile construite acum vor fi fundamentul succesului viitor.",traits:["Răbdare","Colaborare","Diplomație","Relații"]},
+  3:{name:"Anul Creativității și Expresiei",text:"Acesta este un an de exprimare, bucurie și creativitate. Este momentul să îți arăți talentele, să comunici și să te bucuri de viață. Energia este luminoasă și favorabilă expansiunii sociale.",advice:"Exprimă-te! Scrie, vorbește, creează. Nu te ascunde. Lumea are nevoie să te vadă și să te audă.",traits:["Creativitate","Expresie","Bucurie","Expansiune"]},
+  4:{name:"Anul Muncii și Fundamentelor",text:"Acesta este un an de muncă susținută și construcție solidă. Nu este glamorous, dar este esențial. Tot ceea ce construiești acum va rezista. Disciplina și perseverența sunt cuvintele cheie.",advice:"Muncește metodic și nu căuta scurtături. Fundamentele construite acum vor susține visele tale pentru mulți ani.",traits:["Muncă","Disciplină","Construcție","Stabilitate"]},
+  5:{name:"Anul Schimbărilor și Libertății",text:"Acesta este un an dinamic, plin de schimbări, călătorii și oportunități neașteptate. Adaptabilitatea este cheia. Fii deschis la nou și nu te agăța de vechi.",advice:"Îmbrățișează schimbarea, nu te teme de ea. Fiecare transformare din acest an te duce mai aproape de destinul tău adevărat.",traits:["Schimbare","Libertate","Aventură","Adaptabilitate"]},
+  6:{name:"Anul Familiei și Responsabilității",text:"Acesta este un an dedicat familiei, căminului și responsabilităților. Relațiile devin prioritare. Este un an excelent pentru căsătorie, copii și îmbunătățirea locuinței.",advice:"Pune familia pe primul loc. Fii prezent și responsabil față de cei dragi. Iubirea dăruită se întoarce înzecit.",traits:["Familie","Responsabilitate","Iubire","Armonie"]},
+  7:{name:"Anul Reflecției și Spiritualității",text:"Acesta este un an interior, dedicat reflecției, studiului și creșterii spirituale. Nu este momentul pentru acțiuni externe majore, ci pentru adâncirea înțelegerii de sine.",advice:"Retrage-te și reflectează. Studiază, meditează, caută răspunsuri interioare. Înțelepciunea dobândită acum va ghida acțiunile anilor viitori.",traits:["Reflecție","Spiritualitate","Studiu","Introspecție"]},
+  8:{name:"Anul Abundenței și Puterii",text:"Acesta este un an de recoltare, abundență și recunoaștere. Eforturile din anii precedenți încep să dea roade. Este un an excellent pentru afaceri, investiții și avansare în carieră.",advice:"Gândește mare și acționează cu integritate. Abundența vin când îți folosești puterea în serviciul binelui comun.",traits:["Abundență","Putere","Recunoaștere","Succes"]},
+  9:{name:"Anul Finalizărilor și Eliberării",text:"Acesta este ultimul an dintr-un ciclu de 9 ani — un an de finalizări, eliberare și pregătire pentru un nou început. Este momentul să laşi să plece ceea ce nu mai servește.",advice:"Eliberează cu grație tot ceea ce și-a trăit menirea — relații, proiecte, identități vechi. Faci loc pentru miracolele anului următor.",traits:["Finalizare","Eliberare","Compasiune","Transformare"]},
+  11:{name:"Anul Iluminării — Număr Maestru",text:"Un an de inspirație, revelații și conexiune spirituală profundă. Numerele maestru în anni personali aduc intensitate și oportunități de creștere accelerată.",advice:"Urmează-ți intuiția și fii deschis la mesajele universului. Acest an poate schimba fundamental direcția vieții tale.",traits:["Iluminare","Inspirație","Revelație","Transformare profundă"]},
+  22:{name:"Anul Manifestării Maestru",text:"Un an de manifestare la scară mare și construcție de moștenire. Visele tale cele mai ambițioase pot deveni realitate acum.",advice:"Acționează cu viziune și integritate. Ceea ce construiești acum poate rezista generații.",traits:["Manifestare","Viziune","Construcție","Moștenire"]}
+};
+
+const MATRIX_MEANINGS = {
+  1:"Cifra 1 în matrice reprezintă forța voinței și energia egoului. Cu cât mai multe cifre de 1, cu atât mai puternică este voința.",
+  2:"Cifra 2 indică sensibilitatea energetică și intuiția. Persoanele cu 2 în matrice sunt empate și simt energiile subtile.",
+  3:"Cifra 3 arată interesul pentru cunoaștere și capacitatea de memorare. Cei cu multe cifre de 3 au o memorie remarcabilă.",
+  4:"Cifra 4 reflectă vitalitatea fizică și sănătatea. Numărul de 4-uri arată rezervele de energie fizică disponibile.",
+  5:"Cifra 5 este centrul matricei — logica și intuiția echilibrate. Este cel mai important punct al matricei.",
+  6:"Cifra 6 indică abilitățile practice și munca pământeană. Cei cu 6 în matrice excelează în activități hands-on.",
+  7:"Cifra 7 arată talentul spiritual și vocația. Prezența lui 7 indică o misiune spirituală importantă.",
+  8:"Cifra 8 reflectă simțul responsabilității și al datoriei față de ceilalți. Cei cu 8 sunt piloni ai comunității.",
+  9:"Cifra 9 reprezintă memoria și inteligența universală. Cei cu 9 au acces la o înțelepciune profundă."
+};
+
+// Render traits
+function renderTraits(containerId, traits, dark=false) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = traits.map(t => `<span class="trait ${dark?'dark':''}">${t}</span>`).join('');
+}
+
+function calculate() {
+  const day = document.getElementById('dayInput').value;
+  const month = document.getElementById('monthInput').value;
+  const year = document.getElementById('yearInput').value;
+  const name = document.getElementById('nameInput').value.trim();
+
+  if (!day || !month || !year) { alert('Te rugăm să completezi data nașterii!'); return; }
+
+  const dateStr = `${year}${month}${day}`;
+
+  // Display header
+  document.getElementById('displayName').textContent = name || 'Analiză Numerologică';
+  document.getElementById('displayDate').textContent = `${parseInt(day)} ${['','Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'][parseInt(month)]} ${year}`;
+
+  // --- Destiny ---
+  const destiny = getDestiny(`${year}-${month}-${day}`);
+  const dd = DESTINY_DATA[destiny] || DESTINY_DATA[9];
+  document.getElementById('destinyBadge').textContent = destiny;
+  document.getElementById('destinyTitle').textContent = dd.title;
+  document.getElementById('destinyArchetype').textContent = dd.archetype;
+  document.getElementById('destinyMission').textContent = dd.mission;
+  document.getElementById('destinyTalents').textContent = dd.talents;
+  document.getElementById('destinyShadow').textContent = dd.shadow;
+  renderTraits('destinyTraits', dd.traits);
+
+  // --- Name ---
+  if (name) {
+    const nameNum = getNameNumber(name);
+    const nd = DESTINY_DATA[nameNum] || DESTINY_DATA[1];
+    document.getElementById('nameBadge').textContent = nameNum;
+    document.getElementById('nameTitle').textContent = nd.title;
+    document.getElementById('nameArchetype').textContent = nd.archetype;
+    document.getElementById('nameEnergy').textContent = `Prin numele tău vibrezi cu energia lui ${nd.title}. ${nd.mission}`;
+    document.getElementById('namePerception').textContent = `Ceilalți te percep ca pe cineva cu ${nd.traits.slice(0,3).join(', ').toLowerCase()} — aceasta este energia pe care o proiectezi în lume prin simpla rostire a numelui tău.`;
+    document.getElementById('nameChallenge').textContent = nd.shadow;
+    renderTraits('nameTraits', nd.traits);
+  } else {
+    document.getElementById('nameBadge').textContent = '?';
+    document.getElementById('nameTitle').textContent = 'Introdu numele pentru analiză';
+  }
+
+  // --- Mind (day) ---
+  const dayInt = parseInt(day);
+  const mindNum = reduceNumber(dayInt);
+  const md = MIND_DATA[mindNum] || MIND_DATA[1];
+  document.getElementById('mindBadge').textContent = dayInt;
+  document.getElementById('mindTitle').textContent = md.title;
+  document.getElementById('mindArchetype').textContent = md.archetype;
+  document.getElementById('mindThinking').textContent = md.thinking;
+  document.getElementById('mindTalent').textContent = md.talent;
+  renderTraits('mindTraits', md.traits);
+
+  // --- Month ---
+  const monthInt = parseInt(month);
+  const mon = MONTH_DATA[monthInt];
+  document.getElementById('monthBadge').textContent = monthInt;
+  document.getElementById('monthTitle').textContent = mon.name;
+  document.getElementById('monthArchetype').textContent = mon.archetype;
+  document.getElementById('monthInfluence').textContent = mon.influence;
+  renderTraits('monthTraits', mon.traits);
+
+  // --- Personal Year ---
+  const py = getPersonalYear(day, month, year);
+  const pyd = PERSONAL_YEAR_DATA[py] || PERSONAL_YEAR_DATA[1];
+  document.getElementById('yearNumBig').textContent = py;
+  document.getElementById('yearName').textContent = pyd.name;
+  document.getElementById('yearText').textContent = pyd.text;
+  document.getElementById('yearAdvice').textContent = pyd.advice;
+  renderTraits('yearTraits', pyd.traits);
+
+  // --- Matrix ---
+  const matrix = buildMatrix(dateStr);
+  const grid = document.getElementById('matrixGrid');
+  grid.innerHTML = '';
+  [[7,8,9],[4,5,6],[1,2,3]].forEach(row => {
+    row.forEach(num => {
+      const count = matrix[num];
+      const cell = document.createElement('div');
+      cell.className = 'matrix-cell' + (count > 0 ? ' has-number' : '');
+      cell.innerHTML = `
+        <div class="matrix-pos">Pos. ${num}</div>
+        <div class="matrix-digits ${count===0?'empty':''}">${count > 0 ? String(num).repeat(count) : '○'}</div>
+        <div class="matrix-count">${count > 0 ? count+(count===1?' apariție':' apariții') : 'lipsă'}</div>
+      `;
+      grid.appendChild(cell);
+    });
+  });
+
+  const meaningsEl = document.getElementById('matrixMeanings');
+  meaningsEl.innerHTML = '';
+  for (let n = 1; n <= 9; n++) {
+    if (matrix[n] > 0) {
+      const div = document.createElement('div');
+      div.className = 'matrix-meaning-item';
+      div.innerHTML = `<div class="matrix-num-label">${n}×${matrix[n]}</div><div class="matrix-meaning-text">${MATRIX_MEANINGS[n]}</div>`;
+      meaningsEl.appendChild(div);
+    }
+  }
+
+  const missing = Object.keys(matrix).filter(k => matrix[k] === 0).map(Number);
+  const missingEl = document.getElementById('matrixMissing');
+  if (missing.length > 0) {
+    missingEl.innerHTML = `<div class="matrix-missing"><div class="matrix-missing-title">✦ Lecții Karmice — Cifre Lipsă: ${missing.join(', ')}</div><div class="matrix-missing-text">Cifrele absente din matrice reprezintă lecțiile karmice ale acestei vieți — zone de existență unde sufletul tău a ales să crească și să se transforme. Ele nu sunt lipsuri, ci invitații divine spre evoluție.</div></div>`;
+  } else {
+    missingEl.innerHTML = '';
+  }
+
+  // Show results
+  const results = document.getElementById('results');
+  results.classList.add('visible');
+  results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
