@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flori Numerologie</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  min-height: 100vh;
+  background: #07070f;
+  font-family: 'Cormorant Garamond', serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 16px 50px;
+  position: relative;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 10%, rgba(192,132,252,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 80% 90%, rgba(251,191,36,0.06) 0%, transparent 60%);
+}
+.stars {
+  position: fixed; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 65%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88% 75%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 85%, rgba(192,132,252,0.6) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 15% 45%, rgba(251,191,36,0.4) 0%, transparent 100%);
+}
+
+.wrap { width: 100%; max-width: 480px; position: relative; z-index: 1; }
+
+/* HEADER */
+.avatar {
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 10px;
+  animation: float 5s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  text-align: center;
+  background: linear-gradient(135deg, #c084fc, #fbbf24, #fb923c);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 6px;
+}
+.tagline {
+  text-align: center;
+  font-size: 15px;
+  color: #9d94b8;
+  font-style: italic;
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+}
+
+/* SECTION LABEL */
+.sec-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #6b6385;
+  text-align: center;
+  margin: 20px 0 10px;
+}
+
+/* LINK CARD */
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(212,175,255,0.15);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #ede8ff;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.link-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+.link-card.purple::before { background: linear-gradient(90deg, #c084fc, #e879f9); }
+.link-card.gold::before { background: linear-gradient(90deg, #fbbf24, #fb923c); }
+.link-card.teal::before { background: linear-gradient(90deg, #2dd4bf, #c084fc); }
+.link-card.rose::before { background: linear-gradient(90deg, #f43f5e, #fb923c); }
+.link-card.blue::before { background: linear-gradient(90deg, #38bdf8, #c084fc); }
+
+.link-card:hover {
+  border-color: rgba(192,132,252,0.4);
+  background: rgba(192,132,252,0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(192,132,252,0.2);
+}
+.link-card:active { transform: translateY(0); }
+
+.card-icon { font-size: 28px; flex-shrink: 0; }
+.card-text { flex: 1; }
+.card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: #ede8ff;
+}
+.card-desc { font-size: 13px; color: #9d94b8; line-height: 1.4; }
+.card-arrow { color: #6b6385; font-size: 18px; flex-shrink: 0; }
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 12px;
+  color: #6b6385;
+  letter-spacing: 1px;
+}
+.footer span { color: #c084fc; }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap">
+
+  <div class="avatar">🔮</div>
+  <h1>Flori Numerologie</h1>
+  <p class="tagline">Descoperă mesajul numerelor tale</p>
+
+  <div class="sec-label">✦ Calculatoare ✦</div>
+
+  <a class="link-card purple" href="calculator-numerologie-.html">
+    <div class="card-icon">⭐</div>
+    <div class="card-text">
+      <div class="card-title">Calculator Numerologie</div>
+      <div class="card-desc">Destin · Suflet · Carieră · Bani · Numere lipsă</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="link-card rose" href="compatibilitate-numerologie-.html">
+    <div class="card-icon">💞</div>
+    <div class="card-text">
+      <div class="card-title">Compatibilitate Numerologică</div>
+      <div class="card-desc">Matrice · Vectori karmici · Ani personali · Blocaje</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="link-card gold" href="analiza-personala.html">
+    <div class="card-icon">📊</div>
+    <div class="card-text">
+      <div class="card-title">Analiză Personală</div>
+      <div class="card-desc">Profil numerologic complet personalizat</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="link-card teal" href="matrice-pitagoreica.html">
+    <div class="card-icon">🧮</div>
+    <div class="card-text">
+      <div class="card-title">Matricea Pitagoreică</div>
+      <div class="card-desc">Analiza matricei tale numerologice</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <div class="sec-label">✦ Resurse ✦</div>
+
+  <a class="link-card blue" href="ghid-numerologie.html">
+    <div class="card-icon">📖</div>
+    <div class="card-text">
+      <div class="card-title">Ghid Numerologie</div>
+      <div class="card-desc">Înțelege semnificația numerelor 1–33</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="link-card purple" href="Consiliere_Numerologica_Famili...">
+    <div class="card-icon">👨‍👩‍👧</div>
+    <div class="card-text">
+      <div class="card-title">Consiliere Familie</div>
+      <div class="card-desc">Numerologie pentru familie și relații</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <div class="footer">
+    Cu <span>♡</span> de la Flori Numerologie · 2026
+  </div>
+
+</div>
+</body>
+</html>

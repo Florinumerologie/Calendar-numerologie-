@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator Numerologie | Αριθμολογία</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a12;
+    --bg2: #0f0f1e;
+    --card: #13131f;
+    --border: rgba(180,140,255,0.18);
+    --accent: #a78bfa;
+    --accent2: #e879f9;
+    --accent3: #38bdf8;
+    --gold: #f5c842;
+    --text: #e8e0ff;
+    --text2: #b8aed4;
+    --glow: rgba(167,139,250,0.3);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Starfield */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 45%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 60% 70%, rgba(167,139,250,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 25% 35%, rgba(232,121,249,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Nebula */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(167,139,250,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 80%, rgba(232,121,249,0.05) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 50% 50%, rgba(56,189,248,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 50px 20px 30px;
+    position: relative;
+  }
+
+  .lang-switcher {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    display: flex;
+    gap: 8px;
+  }
+
+  .lang-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 13px;
+    transition: all 0.3s;
+  }
+  .lang-btn.active, .lang-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(167,139,250,0.1);
+  }
+
+  .sigil {
+    font-size: 48px;
+    margin-bottom: 10px;
+    display: block;
+    animation: floatSigil 6s ease-in-out infinite;
+  }
+  @keyframes floatSigil {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-family: 'Philosopher', sans-serif;
+    font-size: 14px;
+    color: var(--text2);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    opacity: 0.4;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .divider span { color: var(--accent); font-size: 16px; }
+
+  /* INPUT FORM */
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--gold));
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media(max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .form-group label {
+    font-family: 'Philosopher', sans-serif;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .form-group input,
+  .form-group select {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(167,139,250,0.2);
+    background: rgba(167,139,250,0.05);
+  }
+  .form-group select option {
+    background: #16162a;
+    color: var(--text);
+  }
+  .date-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1.4fr;
+    gap: 8px;
+  }
+
+  .calc-btn {
+    width: 100%;
+    margin-top: 24px;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .calc-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+  .calc-btn:hover::after { transform: translateX(100%); }
+  .calc-btn:hover { box-shadow: 0 8px 30px rgba(167,139,250,0.4); transform: translateY(-2px); }
+
+  /* RESULTS */
+  #results { display: none; }
+
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+    color: var(--accent);
+    text-align: center;
+    margin: 30px 0 16px;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    margin: 8px auto 0;
+    border-radius: 2px;
+  }
+
+  /* NUMBERS GRID */
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .num-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 14px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .num-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(167,139,250,0.2);
+  }
+  .num-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .num-card.destiny::before { background: linear-gradient(90deg, #a78bfa, #e879f9); }
+  .num-card.soul::before { background: linear-gradient(90deg, #38bdf8, #a78bfa); }
+  .num-card.expression::before { background: linear-gradient(90deg, #f5c842, #f97316); }
+  .num-card.birth::before { background: linear-gradient(90deg, #34d399, #38bdf8); }
+  .num-card.year::before { background: linear-gradient(90deg, #e879f9, #f5c842); }
+  .num-card.karmic::before { background: linear-gradient(90deg, #f43f5e, #e879f9); }
+  .num-card.missing::before { background: linear-gradient(90deg, #64748b, #94a3b8); }
+
+  .num-label {
+    font-family: 'Philosopher', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 8px;
+  }
+  .num-value {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.2rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .num-name {
+    font-size: 13px;
+    color: var(--text2);
+    font-style: italic;
+  }
+
+  /* ANALYSIS SECTIONS */
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  @media(max-width: 640px) { .analysis-grid { grid-template-columns: 1fr; } }
+
+  .analysis-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .analysis-card:hover {
+    border-color: rgba(167,139,250,0.35);
+    box-shadow: 0 6px 25px rgba(167,139,250,0.1);
+  }
+  .analysis-card.full { grid-column: 1 / -1; }
+
+  .analysis-card .card-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .analysis-card h3 {
+    font-family: 'Philosopher', sans-serif;
+    font-size: 15px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .analysis-card p {
+    font-size: 15px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+  .analysis-card .highlight {
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .analysis-card .num-badge {
+    display: inline-block;
+    background: rgba(167,139,250,0.15);
+    border: 1px solid rgba(167,139,250,0.3);
+    color: var(--accent);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  /* COMPATIBILITY TABLE */
+  .compat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  .compat-table th {
+    padding: 10px 12px;
+    text-align: left;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+  }
+  .compat-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  .compat-table tr:last-child td { border-bottom: none; }
+  .compat-table tr:hover td { background: rgba(167,139,250,0.05); }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-family: 'Philosopher', sans-serif;
+    letter-spacing: 1px;
+  }
+  .tag.excellent { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+  .tag.good { background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); }
+  .tag.challenging { background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+  .tag.karmic { background: rgba(244,63,94,0.15); color: #f43f5e; border: 1px solid rgba(244,63,94,0.3); }
+
+  /* MISSING NUMBERS */
+  .missing-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .missing-item {
+    background: rgba(100,116,139,0.1);
+    border: 1px solid rgba(100,116,139,0.3);
+    border-radius: 12px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 80px;
+  }
+  .missing-item .mn { font-family: 'Cinzel Decorative', serif; font-size: 1.3rem; color: #94a3b8; }
+  .missing-item .ml { font-size: 11px; color: #64748b; margin-top: 4px; }
+
+  /* PRINT BTN */
+  .action-bar {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 30px 0 10px;
+  }
+  .action-btn {
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .action-btn.primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    color: white;
+  }
+  .action-btn.secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text2);
+  }
+  .action-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(167,139,250,0.25); }
+
+  /* TOOLTIP MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: #16162a;
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: none;
+    border: none;
+    color: var(--text2);
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .modal-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .modal-title {
+    font-family: 'Philosopher', sans-serif;
+    font-size: 18px;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .modal-section { margin-bottom: 14px; }
+  .modal-section h4 {
+    font-family: 'Philosopher', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 6px;
+  }
+  .modal-section p {
+    font-size: 15px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    body::before, body::after { display: none; }
+    .action-bar, .lang-switcher, .form-card { display: none; }
+    .analysis-card, .num-card { border: 1px solid #ccc; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ro')" id="btn-ro">🇷🇴 RO</button>
+      <button class="lang-btn" onclick="setLang('gr')" id="btn-gr">🇬🇷 GR</button>
+    </div>
+    <span class="sigil">✦</span>
+    <h1 id="h-title">Calculator Numerologie</h1>
+    <p class="subtitle" id="h-sub">Numerologie · Αριθμολογία</p>
+    <div class="divider"><span>✦</span></div>
+  </header>
+
+  <div class="form-card">
+    <div class="form-grid">
+      <div class="form-group">
+        <label id="l-name">Nume Complet</label>
+        <input type="text" id="inp-name" placeholder="ex: Maria Ionescu">
+      </div>
+      <div class="form-group">
+        <label id="l-birth">Data Nașterii</label>
+        <div style="display:grid; grid-template-columns:0.8fr 1.6fr 1.2fr; gap:8px;">
+          <select id="inp-day" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 8px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:16px;outline:none;transition:all 0.3s;appearance:none;text-align:center;">
+            <option value="" style="background:#13131f">ZI</option>
+          </select>
+          <select id="inp-month" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 8px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:16px;outline:none;transition:all 0.3s;appearance:none;text-align:center;">
+            <option value="" style="background:#13131f">LUNĂ</option>
+          </select>
+          <select id="inp-year" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:12px 8px;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:16px;outline:none;transition:all 0.3s;appearance:none;text-align:center;">
+            <option value="" style="background:#13131f">AN</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calculate()" id="btn-calc">✦ Calculează ✦</button>
+  </div>
+
+  <div id="results">
+
+    <h2 class="section-title" id="r-numbers">Numerele Tale</h2>
+    <div class="numbers-grid" id="numbers-grid"></div>
+
+    <h2 class="section-title" id="r-analysis">Analiză Completă</h2>
+    <div class="analysis-grid" id="analysis-grid"></div>
+
+    <h2 class="section-title" id="r-compat">Compatibilitate & Relații Carmice</h2>
+    <div class="analysis-card full">
+      <span class="card-icon">💫</span>
+      <h3 id="c-title">Numerele compatibile cu numărul tău de destin</h3>
+      <div id="compat-content"></div>
+    </div>
+
+    <h2 class="section-title" id="r-missing">Numerele Lipsă</h2>
+    <div class="analysis-card full">
+      <span class="card-icon">🌑</span>
+      <h3 id="m-title">Numere absente din numele tău</h3>
+      <p id="m-desc" style="margin-bottom:14px;"></p>
+      <div id="missing-content"></div>
+    </div>
+
+    <div class="action-bar">
+      <button class="action-btn primary" onclick="window.print()">🖨️ <span id="btn-print">Tipărește</span></button>
+      <button class="action-btn secondary" onclick="document.getElementById('results').style.display='none'; document.getElementById('inp-name').value=''; document.getElementById('inp-day').value=''; document.getElementById('inp-month').value=''; document.getElementById('inp-year').value='';" id="btn-reset-txt">↩ <span>Reset</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal pentru detalii număr -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
+    <div class="modal-num" id="modal-num"></div>
+    <div class="modal-title" id="modal-title"></div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// =============================================
+// LANGUAGE DATA
+// =============================================
+const T = {
+  ro: {
+    title: "Calculator Numerologie",
+    lname: "Nume Complet",
+    lbirth: "Data Nașterii",
+    btncalc: "✦ Calculează ✦",
+    rnumbers: "Numerele Tale",
+    ranalysis: "Analiză Completă",
+    rcompat: "Compatibilitate & Relații Carmice",
+    rmissing: "Numerele Lipsă",
+    ctitle: "Compatibilitate după numărul de destin",
+    mtitle: "Numere absente din matrice",
+    mdesc: "Numerele lipsă indică lecții karmice și zone de dezvoltare personală în această viață.",
+    btnprint: "Tipărește",
+    numLabels: {
+      destiny: "Numărul Destinului",
+      soul: "Numărul Sufletului",
+      expression: "Expresie / Personalitate",
+      birth: "Numărul Nașterii",
+      year: "Anul Personal",
+      karmic: "Numărul Karmic"
+    },
+    numNames: {
+      1:"Liderul", 2:"Diplomatul", 3:"Creatorul", 4:"Constructorul",
+      5:"Aventurierul", 6:"Îngrijitorul", 7:"Misticul", 8:"Magnatul",
+      9:"Umanitarul", 11:"Vizionarul", 22:"Maestrul Constructor", 33:"Maestrul Vindecător"
+    },
+    sections: {
+      destiny: { icon:"⭐", title:"Numărul Destinului", key:"destiny" },
+      career: { icon:"💼", title:"Carieră & Misiune" },
+      money: { icon:"💰", title:"Energie Financiară" },
+      soul: { icon:"🌙", title:"Dorința Sufletului" },
+      karmic: { icon:"♾️", title:"Lecții Karmice" },
+    },
+    numDetail: {
+      1: {
+        light: "Lider înnăscut, pionier, independent, voincios. Ai capacitatea de a deschide drumuri noi.",
+        shadow: "Tendință spre ego, dominanță, izolare. Înveți să colaborezi.",
+        career: "Antreprenoriat, conducere, politică, inovație.",
+        money: "Atrage banii prin inițiativă personală și curaj.",
+        karmic: "Lecția independenței și responsabilității față de sine."
+      },
+      2: {
+        light: "Diplomat, empatic, armonios, partener ideal. Excelezi în echipă.",
+        shadow: "Frică de conflict, dependență emoțională, pasivitate.",
+        career: "Consiliere, mediație, parteneriate, îngrijire.",
+        money: "Prosperă în colaborare și parteneriate echilibrate.",
+        karmic: "Lecția echilibrului între a da și a primi."
+      },
+      3: {
+        light: "Creativ, comunicativ, vesel, inspirat. Ai darul cuvântului și al artei.",
+        shadow: "Superficialitate, risipă de energie, lipsă de concentrare.",
+        career: "Arte, comunicare, scriere, spectacol, marketing.",
+        money: "Banii vin prin creativitate, dar trebuie gestionate.",
+        karmic: "Lecția exprimării autentice fără teamă de judecată."
+      },
+      4: {
+        light: "Stabil, muncitor, organizat, de încredere. Construiești lucruri durabile.",
+        shadow: "Rigiditate, rezistență la schimbare, excesiv de serios.",
+        career: "Inginerie, construcții, finanțe, administrație.",
+        money: "Prosperitate prin muncă constantă și planificare.",
+        karmic: "Lecția disciplinei și construirii pas cu pas."
+      },
+      5: {
+        light: "Liber, adaptabil, aventuros, carismatic. Iubești varietatea.",
+        shadow: "Inconstanță, exces, irresponsabilitate.",
+        career: "Călătorii, vânzări, media, sport, antreprenoriat.",
+        money: "Câștiguri variabile; evită impulsivitatea financiară.",
+        karmic: "Lecția libertății responsabile."
+      },
+      6: {
+        light: "Iubitor, responsabil, hrănitor, armonios. Familia este prioritate.",
+        shadow: "Sacrificiu excesiv, control, perfecționism.",
+        career: "Îngrijire, educație, design, medicină, asistență socială.",
+        money: "Prosperitate legată de armonie familială și comunitate.",
+        karmic: "Lecția iubirii necondiționate, inclusiv față de sine."
+      },
+      7: {
+        light: "Analist, spiritual, intuitiv, înțelept. Cauti adevărul profund.",
+        shadow: "Izolare, pesimism, distanțare emoțională.",
+        career: "Cercetare, psihologie, spiritualitate, filosofie, IT.",
+        money: "Banii vin prin expertiză și cunoaștere profundă.",
+        karmic: "Lecția credinței și conectării cu divinul."
+      },
+      8: {
+        light: "Ambițios, puternic, autoritar, orientat spre succes material.",
+        shadow: "Obsesia pentru putere, materialism, abuz de autoritate.",
+        career: "Afaceri, finanțe, management, investiții, imobiliare.",
+        money: "Potențial enorm de bogăție; karma financiară activă.",
+        karmic: "Lecția folosirii puterii cu înțelepciune și integritate."
+      },
+      9: {
+        light: "Umanitar, compasiv, înțelept, universal. Trăiești pentru alții.",
+        shadow: "Martir, dificultate în a lăsa să treacă trecutul.",
+        career: "Artă, filantropie, medicină, spiritualitate, drept.",
+        money: "Banii vin când ajuți cu adevărat pe ceilalți.",
+        karmic: "Lecția eliberării și completării ciclurilor."
+      },
+      11: {
+        light: "Număr maestru: vizionar, intuitiv, inspirator spiritual. Canal divin.",
+        shadow: "Anxietate extremă, hipersensibilitate, presiune interioară.",
+        career: "Spiritualitate, artă, leadership inspirațional, vindecare.",
+        money: "Abundența vine când trăiești în misiunea spirituală.",
+        karmic: "Lecția iluminării și inspirării umanității."
+      },
+      22: {
+        light: "Număr maestru: constructor de vise mari, pragmatic și vizionar.",
+        shadow: "Copleșire de potențial, frică de eșec, perfecționism.",
+        career: "Arhitectură, politică, construcții la scară mare, ONG.",
+        money: "Potențial de bogăție extraordinară prin proiecte mari.",
+        karmic: "Lecția transformării viziunilor în realitate concretă."
+      },
+      33: {
+        light: "Număr maestru: vindecător universal, iubire necondiționată.",
+        shadow: "Sacrificiu de sine excesiv, dificultate în a pune limite.",
+        career: "Vindecare, spiritualitate, artă transformatoare, educație.",
+        money: "Abundența vine prin slujire autentică față de lume.",
+        karmic: "Lecția iubirii divine și vindecării colective."
+      }
+    },
+    compatibility: {
+      1: [
+        {num:"1", type:"challenging", desc:"Dinamică puternică; ambii vor să conducă."},
+        {num:"2", type:"excellent", desc:"Echilibru perfect — forță + sensibilitate."},
+        {num:"3", type:"good", desc:"Energie creativă și entuziasm comun."},
+        {num:"4", type:"challenging", desc:"Conflicte între libertate și structură."},
+        {num:"5", type:"good", desc:"Aventură și dinamism, dar inconstanță."},
+        {num:"6", type:"good", desc:"1 conduce, 6 armonizează — echilibru."},
+        {num:"7", type:"good", desc:"Respect reciproc și independență."},
+        {num:"8", type:"excellent", desc:"Putere și ambiție comune — succes!"},
+        {num:"9", type:"good", desc:"1 pionier, 9 înțelept — complementari."},
+      ],
+      2: [
+        {num:"1", type:"excellent", desc:"Echilibru perfect — forță + sensibilitate."},
+        {num:"2", type:"good", desc:"Empatie profundă; risc de co-dependență."},
+        {num:"3", type:"excellent", desc:"Comunicare și creativitate armonioase."},
+        {num:"4", type:"good", desc:"Stabilitate și grijă reciprocă."},
+        {num:"5", type:"challenging", desc:"5 vrea libertate, 2 vrea stabilitate."},
+        {num:"6", type:"excellent", desc:"Armonie familială și emoțională."},
+        {num:"7", type:"good", desc:"Conexiune spirituală profundă."},
+        {num:"8", type:"challenging", desc:"8 dominator poate frustra 2."},
+        {num:"9", type:"excellent", desc:"Iubire profundă și compasiune."},
+      ],
+      3: [
+        {num:"1", type:"good", desc:"Energie și entuziasm comun."},
+        {num:"2", type:"excellent", desc:"Comunicare și armonie."},
+        {num:"3", type:"good", desc:"Creativitate dublată; risc superficialitate."},
+        {num:"4", type:"challenging", desc:"3 creativ vs 4 practic — tensiuni."},
+        {num:"5", type:"excellent", desc:"Distracție, comunicare, aventură!"},
+        {num:"6", type:"good", desc:"3 inspiră, 6 armonizează."},
+        {num:"7", type:"challenging", desc:"7 retras vs 3 sociabil — adaptare."},
+        {num:"8", type:"good", desc:"3 creativ + 8 ambițios = succes."},
+        {num:"9", type:"excellent", desc:"Artă, viziune și inimă mare."},
+      ],
+      4: [
+        {num:"1", type:"challenging", desc:"Conflicte între libertate și structură."},
+        {num:"2", type:"good", desc:"4 oferă stabilitate, 2 căldură."},
+        {num:"3", type:"challenging", desc:"3 creativ vs 4 practic."},
+        {num:"4", type:"excellent", desc:"Stabilitate și dedicare comună."},
+        {num:"5", type:"karmic", desc:"Lecție karmică puternică — opus total."},
+        {num:"6", type:"excellent", desc:"Familie, muncă, armonie — ideal."},
+        {num:"7", type:"excellent", desc:"Construcție și gândire profundă."},
+        {num:"8", type:"good", desc:"Ambii muncitori; succes material."},
+        {num:"9", type:"challenging", desc:"4 practic vs 9 idealist."},
+      ],
+      5: [
+        {num:"1", type:"good", desc:"Aventură și energie."},
+        {num:"2", type:"challenging", desc:"Nevoie de libertate vs stabilitate."},
+        {num:"3", type:"excellent", desc:"Distracție și comunicare."},
+        {num:"4", type:"karmic", desc:"Lecție karmică — opuși complementari."},
+        {num:"5", type:"good", desc:"Aventuri comune; risc instabilitate."},
+        {num:"6", type:"challenging", desc:"5 liber vs 6 responsabil."},
+        {num:"7", type:"excellent", desc:"Intelectual și explorator."},
+        {num:"8", type:"good", desc:"Ambiție și acțiune."},
+        {num:"9", type:"excellent", desc:"Libertate și viziune universală."},
+      ],
+      6: [
+        {num:"1", type:"good", desc:"1 conduce, 6 armonizează."},
+        {num:"2", type:"excellent", desc:"Iubire, familie, armonie."},
+        {num:"3", type:"good", desc:"6 îngrijitor + 3 creator."},
+        {num:"4", type:"excellent", desc:"Familie ideală — stabilitate."},
+        {num:"5", type:"challenging", desc:"5 liber vs 6 responsabil."},
+        {num:"6", type:"excellent", desc:"Armonie și dragoste profundă."},
+        {num:"7", type:"good", desc:"6 cald + 7 profund = echilibru."},
+        {num:"8", type:"good", desc:"Succes și familie."},
+        {num:"9", type:"excellent", desc:"Iubire universală și compasiune."},
+      ],
+      7: [
+        {num:"1", type:"good", desc:"Respect și independență."},
+        {num:"2", type:"good", desc:"Conexiune spirituală."},
+        {num:"3", type:"challenging", desc:"7 retras vs 3 sociabil."},
+        {num:"4", type:"excellent", desc:"Analiză și construcție."},
+        {num:"5", type:"excellent", desc:"Explorator și intelectual."},
+        {num:"6", type:"good", desc:"7 profund + 6 cald."},
+        {num:"7", type:"good", desc:"Înțelegere profundă; risc izolare."},
+        {num:"8", type:"challenging", desc:"7 spiritual vs 8 material."},
+        {num:"9", type:"excellent", desc:"Înțelepciune și spirit comun."},
+      ],
+      8: [
+        {num:"1", type:"excellent", desc:"Putere și ambiție — succes!"},
+        {num:"2", type:"challenging", desc:"8 dominator poate frustra 2."},
+        {num:"3", type:"good", desc:"3 creativ + 8 ambițios."},
+        {num:"4", type:"good", desc:"Muncă și succes material."},
+        {num:"5", type:"good", desc:"Acțiune și ambiție."},
+        {num:"6", type:"good", desc:"Familie și succes."},
+        {num:"7", type:"challenging", desc:"8 material vs 7 spiritual."},
+        {num:"8", type:"good", desc:"Putere și bogăție comune."},
+        {num:"9", type:"karmic", desc:"Lecție karmică — material vs spiritual."},
+      ],
+      9: [
+        {num:"1", type:"good", desc:"1 pionier, 9 înțelept."},
+        {num:"2", type:"excellent", desc:"Compasiune și iubire."},
+        {num:"3", type:"excellent", desc:"Artă, inimă, viziune."},
+        {num:"4", type:"challenging", desc:"9 idealist vs 4 practic."},
+        {num:"5", type:"excellent", desc:"Libertate și viziune."},
+        {num:"6", type:"excellent", desc:"Iubire universală."},
+        {num:"7", type:"excellent", desc:"Înțelepciune și spirit."},
+        {num:"8", type:"karmic", desc:"Lecție karmică — spiritual vs material."},
+        {num:"9", type:"excellent", desc:"Viziune și misiune comună."},
+      ],
+      11: [
+        {num:"2", type:"excellent", desc:"11 se reduce la 2 — empatie divină."},
+        {num:"6", type:"excellent", desc:"Iubire și misiune spirituală."},
+        {num:"9", type:"excellent", desc:"Vizionari — schimbă lumea împreună."},
+      ],
+      22: [
+        {num:"4", type:"excellent", desc:"22 se reduce la 4 — construcție la scară mare."},
+        {num:"8", type:"excellent", desc:"Proiecte mari și putere."},
+        {num:"6", type:"excellent", desc:"Familie și responsabilitate."},
+      ],
+      33: [
+        {num:"6", type:"excellent", desc:"33 se reduce la 6 — iubire și vindecare."},
+        {num:"9", type:"excellent", desc:"Misiune de vindecare universală."},
+        {num:"2", type:"excellent", desc:"Iubire, empatie, slujire."},
+      ]
+    },
+    missingDesc: {
+      1: "Dificultăți cu inițiativa personală și afirmarea de sine.",
+      2: "Lecție karmică privind cooperarea și echilibrul emoțional.",
+      3: "Provocări în exprimarea creativă și comunicare.",
+      4: "Tendință spre instabilitate; înveți disciplina și perseverența.",
+      5: "Rezistență la schimbare; înveți adaptabilitatea.",
+      6: "Dificultăți în responsabilitate și relații armonioase.",
+      7: "Evitarea introspecției și a profunzimii spirituale.",
+      8: "Blocaje în a-ți afirma puterea materială.",
+      9: "Dificultăți în compasiune universală și eliberare."
+    }
+  },
+  gr: {
+    title: "Αριθμολογία",
+    lname: "Πλήρες Όνομα",
+    lbirth: "Ημερομηνία Γέννησης",
+    btncalc: "✦ Υπολόγισε ✦",
+    rnumbers: "Οι Αριθμοί Σου",
+    ranalysis: "Πλήρης Ανάλυση",
+    rcompat: "Συμβατότητα & Καρμικές Σχέσεις",
+    rmissing: "Ελλείποντες Αριθμοί",
+    ctitle: "Συμβατότητα βάσει αριθμού μοίρας",
+    mtitle: "Απόντες αριθμοί στη μήτρα",
+    mdesc: "Οι ελλείποντες αριθμοί δείχνουν καρμικά μαθήματα και τομείς ανάπτυξης σε αυτή τη ζωή.",
+    btnprint: "Εκτύπωση",
+    numLabels: {
+      destiny: "Αριθμός Μοίρας",
+      soul: "Αριθμός Ψυχής",
+      expression: "Έκφραση / Προσωπικότητα",
+      birth: "Αριθμός Γέννησης",
+      year: "Προσωπικό Έτος",
+      karmic: "Καρμικός Αριθμός"
+    },
+    numNames: {
+      1:"Ο Ηγέτης", 2:"Ο Διπλωμάτης", 3:"Ο Δημιουργός", 4:"Ο Κατασκευαστής",
+      5:"Ο Εξερευνητής", 6:"Ο Φροντιστής", 7:"Ο Μύστης", 8:"Ο Δυνάστης",
+      9:"Ο Ανθρωπιστής", 11:"Ο Οραματιστής", 22:"Ο Μεγάλος Κτίστης", 33:"Ο Μεγάλος Θεραπευτής"
+    },
+    sections: {
+      destiny: { icon:"⭐", title:"Αριθμός Μοίρας", key:"destiny" },
+      career: { icon:"💼", title:"Καριέρα & Αποστολή" },
+      money: { icon:"💰", title:"Οικονομική Ενέργεια" },
+      soul: { icon:"🌙", title:"Επιθυμία Ψυχής" },
+      karmic: { icon:"♾️", title:"Καρμικά Μαθήματα" },
+    },
+    numDetail: {
+      1: {
+        light: "Γεννημένος ηγέτης, πρωτοπόρος, ανεξάρτητος, δυναμικός.",
+        shadow: "Τάση προς εγωισμό, κυριαρχία, απομόνωση.",
+        career: "Επιχειρηματικότητα, ηγεσία, πολιτική, καινοτομία.",
+        money: "Προσελκύει χρήματα μέσω προσωπικής πρωτοβουλίας.",
+        karmic: "Μάθημα ανεξαρτησίας και υπευθυνότητας."
+      },
+      2: {
+        light: "Διπλωμάτης, ενσυναίσθηση, αρμονία, ιδανικός σύντροφος.",
+        shadow: "Φόβος σύγκρουσης, συναισθηματική εξάρτηση.",
+        career: "Συμβουλευτική, διαμεσολάβηση, φροντίδα.",
+        money: "Ευημερεί σε συνεργασίες και ισορροπημένες σχέσεις.",
+        karmic: "Μάθημα ισορροπίας μεταξύ δίνειν και λαμβάνειν."
+      },
+      3: {
+        light: "Δημιουργικός, επικοινωνιακός, χαρούμενος, εμπνευσμένος.",
+        shadow: "Επιπολαιότητα, σπατάλη ενέργειας, έλλειψη εστίασης.",
+        career: "Τέχνες, επικοινωνία, γραφή, παραστάσεις.",
+        money: "Χρήματα μέσω δημιουργικότητας, αλλά χρειάζεται διαχείριση.",
+        karmic: "Μάθημα αυθεντικής έκφρασης χωρίς φόβο κρίσης."
+      },
+      4: {
+        light: "Σταθερός, εργατικός, οργανωτικός, αξιόπιστος.",
+        shadow: "Άκαμπτος, αντίσταση στην αλλαγή.",
+        career: "Μηχανική, κατασκευές, οικονομικά, διοίκηση.",
+        money: "Ευημερία μέσω σταθερής εργασίας και σχεδιασμού.",
+        karmic: "Μάθημα πειθαρχίας και σταδιακής δόμησης."
+      },
+      5: {
+        light: "Ελεύθερος, προσαρμοστικός, τολμηρός, χαρισματικός.",
+        shadow: "Ασταθής, υπερβολές, ανευθυνότητα.",
+        career: "Ταξίδια, πωλήσεις, ΜΜΕ, άθληση.",
+        money: "Μεταβλητά κέρδη· αποφύγετε παρορμητικές δαπάνες.",
+        karmic: "Μάθημα υπεύθυνης ελευθερίας."
+      },
+      6: {
+        light: "Αγαπητικός, υπεύθυνος, θρεπτικός, αρμονικός.",
+        shadow: "Υπερβολική θυσία, έλεγχος, τελειομανία.",
+        career: "Φροντίδα, εκπαίδευση, σχεδιασμός, ιατρική.",
+        money: "Ευημερία συνδεδεμένη με οικογενειακή αρμονία.",
+        karmic: "Μάθημα άνευ όρων αγάπης, ακόμα και προς εαυτόν."
+      },
+      7: {
+        light: "Αναλυτικός, πνευματικός, διαισθητικός, σοφός.",
+        shadow: "Απομόνωση, απαισιοδοξία, συναισθηματική απόσταση.",
+        career: "Έρευνα, ψυχολογία, πνευματικότητα, φιλοσοφία.",
+        money: "Χρήματα μέσω εξειδίκευσης και βαθιάς γνώσης.",
+        karmic: "Μάθημα πίστης και σύνδεσης με το θείο."
+      },
+      8: {
+        light: "Φιλόδοξος, δυναμικός, εξουσιαστικός, επιτυχημένος.",
+        shadow: "Εμμονή με εξουσία, υλισμός.",
+        career: "Επιχειρήσεις, οικονομικά, διαχείριση, επενδύσεις.",
+        money: "Τεράστιο δυναμικό πλούτου· ενεργό καρμικό χρηματοοικονομικό.",
+        karmic: "Μάθημα χρήσης δύναμης με σοφία και ακεραιότητα."
+      },
+      9: {
+        light: "Ανθρωπιστής, συμπονετικός, σοφός, οικουμενικός.",
+        shadow: "Μαρτυρολογία, δυσκολία στη μεταποίηση.",
+        career: "Τέχνη, φιλανθρωπία, ιατρική, πνευματικότητα.",
+        money: "Χρήματα έρχονται όταν αληθινά βοηθάς τους άλλους.",
+        karmic: "Μάθημα απελευθέρωσης και ολοκλήρωσης κύκλων."
+      },
+      11: {
+        light: "Κύριος αριθμός: οραματιστής, διαισθητικός, πνευματικό κανάλι.",
+        shadow: "Ακραίο άγχος, υπερευαισθησία.",
+        career: "Πνευματικότητα, τέχνη, εμπνευσμένη ηγεσία.",
+        money: "Αφθονία μέσω πνευματικής αποστολής.",
+        karmic: "Μάθημα φωτισμού και έμπνευσης της ανθρωπότητας."
+      },
+      22: {
+        light: "Κύριος αριθμός: κτίστης μεγάλων ονείρων, πρακτικός και οραματιστής.",
+        shadow: "Συντριβή από δυνατότητες, φόβος αποτυχίας.",
+        career: "Αρχιτεκτονική, πολιτική, μεγάλης κλίμακας κατασκευές.",
+        money: "Δυνατότητα εξαιρετικού πλούτου μέσω μεγάλων έργων.",
+        karmic: "Μάθημα μετατροπής οραμάτων σε συγκεκριμένη πραγματικότητα."
+      },
+      33: {
+        light: "Κύριος αριθμός: οικουμενικός θεραπευτής, άνευ όρων αγάπη.",
+        shadow: "Υπερβολική αυτοθυσία, δυσκολία ορισμού ορίων.",
+        career: "Θεραπεία, πνευματικότητα, μετασχηματιστική τέχνη.",
+        money: "Αφθονία μέσω αυθεντικής υπηρεσίας στον κόσμο.",
+        karmic: "Μάθημα θείας αγάπης και συλλογικής θεραπείας."
+      }
+    },
+    compatibility: {
+      1: [
+        {num:"1", type:"challenging", desc:"Ισχυρή δυναμική· και οι δύο θέλουν να οδηγούν."},
+        {num:"2", type:"excellent", desc:"Τέλεια ισορροπία — δύναμη + ευαισθησία."},
+        {num:"3", type:"good", desc:"Δημιουργική ενέργεια και κοινός ενθουσιασμός."},
+        {num:"5", type:"good", desc:"Περιπέτεια και δυναμισμός."},
+        {num:"8", type:"excellent", desc:"Κοινή δύναμη και φιλοδοξία — επιτυχία!"},
+        {num:"9", type:"good", desc:"1 πρωτοπόρος, 9 σοφός — συμπληρωματικοί."},
+      ],
+      2: [
+        {num:"1", type:"excellent", desc:"Τέλεια ισορροπία — δύναμη + ευαισθησία."},
+        {num:"3", type:"excellent", desc:"Αρμονική επικοινωνία και δημιουργικότητα."},
+        {num:"6", type:"excellent", desc:"Οικογενειακή και συναισθηματική αρμονία."},
+        {num:"9", type:"excellent", desc:"Βαθιά αγάπη και συμπόνια."},
+      ],
+      3: [
+        {num:"2", type:"excellent", desc:"Επικοινωνία και αρμονία."},
+        {num:"5", type:"excellent", desc:"Διασκέδαση, επικοινωνία, περιπέτεια!"},
+        {num:"9", type:"excellent", desc:"Τέχνη, όραμα και μεγάλη καρδιά."},
+      ],
+      4: [
+        {num:"4", type:"excellent", desc:"Κοινή σταθερότητα και αφοσίωση."},
+        {num:"6", type:"excellent", desc:"Οικογένεια, εργασία, αρμονία — ιδανικό."},
+        {num:"7", type:"excellent", desc:"Ανάλυση και βαθιά σκέψη."},
+      ],
+      5: [
+        {num:"3", type:"excellent", desc:"Διασκέδαση και επικοινωνία."},
+        {num:"7", type:"excellent", desc:"Διανοητικός και εξερευνητικός."},
+        {num:"9", type:"excellent", desc:"Ελευθερία και οικουμενικό όραμα."},
+      ],
+      6: [
+        {num:"2", type:"excellent", desc:"Αγάπη, οικογένεια, αρμονία."},
+        {num:"4", type:"excellent", desc:"Ιδανική οικογένεια — σταθερότητα."},
+        {num:"9", type:"excellent", desc:"Οικουμενική αγάπη και συμπόνια."},
+      ],
+      7: [
+        {num:"4", type:"excellent", desc:"Ανάλυση και κατασκευή."},
+        {num:"5", type:"excellent", desc:"Εξερευνητικός και διανοητικός."},
+        {num:"9", type:"excellent", desc:"Σοφία και κοινό πνεύμα."},
+      ],
+      8: [
+        {num:"1", type:"excellent", desc:"Δύναμη και φιλοδοξία — επιτυχία!"},
+        {num:"4", type:"good", desc:"Εργασία και υλική επιτυχία."},
+      ],
+      9: [
+        {num:"2", type:"excellent", desc:"Συμπόνια και αγάπη."},
+        {num:"3", type:"excellent", desc:"Τέχνη, καρδιά, όραμα."},
+        {num:"6", type:"excellent", desc:"Οικουμενική αγάπη."},
+        {num:"7", type:"excellent", desc:"Σοφία και πνεύμα."},
+      ],
+      11: [{num:"9", type:"excellent", desc:"Οραματιστές — αλλάζουν τον κόσμο μαζί."}],
+      22: [{num:"8", type:"excellent", desc:"Μεγάλα έργα και δύναμη."}],
+      33: [{num:"9", type:"excellent", desc:"Αποστολή οικουμενικής θεραπείας."}]
+    },
+    missingDesc: {
+      1: "Δυσκολίες με προσωπική πρωτοβουλία και αυτοεπιβεβαίωση.",
+      2: "Καρμικό μάθημα συνεργασίας και συναισθηματικής ισορροπίας.",
+      3: "Προκλήσεις στη δημιουργική έκφραση και επικοινωνία.",
+      4: "Τάση αστάθειας· μαθαίνεις πειθαρχία και επιμονή.",
+      5: "Αντίσταση στην αλλαγή· μαθαίνεις προσαρμοστικότητα.",
+      6: "Δυσκολίες υπευθυνότητας και αρμονικών σχέσεων.",
+      7: "Αποφυγή ενδοσκόπησης και πνευματικού βάθους.",
+      8: "Εμπόδια στην υλική δύναμη.",
+      9: "Δυσκολίες στην οικουμενική συμπόνια και απελευθέρωση."
+    }
+  }
+};
+
+// =============================================
+// NUMEROLOGY CALCULATIONS
+// =============================================
+let currentLang = 'ro';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-ro').classList.toggle('active', lang === 'ro');
+  document.getElementById('btn-gr').classList.toggle('active', lang === 'gr');
+  const t = T[lang];
+  document.getElementById('h-title').textContent = t.title;
+  document.getElementById('l-name').textContent = t.lname;
+  document.getElementById('l-birth').textContent = t.lbirth;
+  document.getElementById('btn-calc').textContent = t.btncalc;
+  document.getElementById('r-numbers').textContent = t.rnumbers;
+  document.getElementById('r-analysis').textContent = t.ranalysis;
+  document.getElementById('r-compat').textContent = t.rcompat;
+  document.getElementById('r-missing').textContent = t.rmissing;
+  document.getElementById('c-title').textContent = t.ctitle;
+  document.getElementById('m-title').textContent = t.mtitle;
+  document.getElementById('m-desc').textContent = t.mdesc;
+  document.getElementById('btn-print').textContent = t.btnprint;
+  // Re-render if results visible
+  if (document.getElementById('results').style.display !== 'none') {
+    const name = document.getElementById('inp-name').value;
+    const birth = getBirthValue();
+    if (name && birth) renderResults(name, birth);
+  }
+}
+
+function reduceNum(n, keepMaster=true) {
+  while (n > 9) {
+    if (keepMaster && (n === 11 || n === 22 || n === 33)) return n;
+    n = String(n).split('').reduce((a,b) => a + parseInt(b), 0);
+  }
+  return n;
+}
+
+function letterValue(c) {
+  const map = {
+    a:1,b:2,c:3,d:4,e:5,f:6,g:7,h:8,i:9,
+    j:1,k:2,l:3,m:4,n:5,o:6,p:7,q:8,r:9,
+    s:1,t:2,u:3,v:4,w:5,x:6,y:7,z:8,
+    // Romanian
+    ă:1,â:1,î:9,ș:1,ț:2,
+    // Greek approximate
+    α:1,β:2,γ:3,δ:4,ε:5,ζ:7,η:8,θ:9,
+    ι:9,κ:2,λ:3,μ:4,ν:5,ξ:6,ο:7,π:8,
+    ρ:9,σ:1,τ:2,υ:3,φ:6,χ:5,ψ:7,ω:6
+  };
+  return map[c.toLowerCase()] || 0;
+}
+
+const VOWELS = ['a','e','i','o','u','ă','â','î','α','ε','η','ι','ο','υ','ω'];
+
+function calcDestiny(name) {
+  const sum = name.toLowerCase().replace(/\s/g,'').split('').reduce((a,c) => a + letterValue(c), 0);
+  return reduceNum(sum);
+}
+
+function calcSoul(name) {
+  const sum = name.toLowerCase().replace(/\s/g,'').split('').filter(c => VOWELS.includes(c)).reduce((a,c) => a + letterValue(c), 0);
+  return reduceNum(sum || 9);
+}
+
+function calcExpression(name) {
+  const sum = name.toLowerCase().replace(/\s/g,'').split('').filter(c => !VOWELS.includes(c) && letterValue(c) > 0).reduce((a,c) => a + letterValue(c), 0);
+  return reduceNum(sum || 1);
+}
+
+function calcBirth(dob) {
+  const parts = dob.split('-');
+  const day = parseInt(parts[2]);
+  return reduceNum(day);
+}
+
+function calcPersonalYear(dob) {
+  const parts = dob.split('-');
+  const day = parseInt(parts[2]);
+  const month = parseInt(parts[1]);
+  const currentYear = new Date().getFullYear();
+  return reduceNum(day + month + currentYear);
+}
+
+function calcKarmic(name, dob) {
+  const destiny = calcDestiny(name);
+  const birth = calcBirth(dob);
+  return reduceNum(Math.abs(destiny - birth) || destiny);
+}
+
+function getMissingNumbers(name) {
+  const present = new Set();
+  name.toLowerCase().replace(/\s/g,'').split('').forEach(c => {
+    const v = letterValue(c);
+    if (v > 0) present.add(v);
+  });
+  return [1,2,3,4,5,6,7,8,9].filter(n => !present.has(n));
+}
+
+// =============================================
+// RENDER
+// =============================================
+function getBirthValue() {
+  const d = document.getElementById('inp-day').value;
+  const m = document.getElementById('inp-month').value;
+  const y = document.getElementById('inp-year').value;
+  if (!d || !m || !y) return '';
+  return `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+}
+
+function populateDropdowns() {
+  const dayEl = document.getElementById('inp-day');
+  const monthEl = document.getElementById('inp-month');
+  const yearEl = document.getElementById('inp-year');
+
+  // Days 1-31
+  for (let i = 1; i <= 31; i++) {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = i;
+    dayEl.appendChild(o);
+  }
+
+  // Months
+  const monthsRo = ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'];
+  monthsRo.forEach((name, i) => {
+    const o = document.createElement('option');
+    o.value = i + 1; o.textContent = name;
+    monthEl.appendChild(o);
+  });
+
+  // Years 1930-2015
+  for (let y = 2010; y >= 1930; y--) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    yearEl.appendChild(o);
+  }
+}
+
+populateDropdowns();
+
+function calculate() {
+  const name = document.getElementById('inp-name').value.trim();
+  const birth = getBirthValue();
+  if (!name || !birth) {
+    alert(currentLang === 'ro' ? 'Completează numele și data nașterii!' : 'Συμπλήρωσε όνομα και ημερομηνία γέννησης!');
+    return;
+  }
+  renderResults(name, birth);
+}
+
+function renderResults(name, birth) {
+  const t = T[currentLang];
+  const nums = {
+    destiny: calcDestiny(name),
+    soul: calcSoul(name),
+    expression: calcExpression(name),
+    birth: calcBirth(birth),
+    year: calcPersonalYear(birth),
+    karmic: calcKarmic(name, birth)
+  };
+  const missing = getMissingNumbers(name);
+
+  // Numbers grid
+  const grid = document.getElementById('numbers-grid');
+  grid.innerHTML = '';
+  const types = ['destiny','soul','expression','birth','year','karmic'];
+  types.forEach(type => {
+    const n = nums[type];
+    const card = document.createElement('div');
+    card.className = `num-card ${type}`;
+    card.onclick = () => showModal(n);
+    card.innerHTML = `
+      <div class="num-label">${t.numLabels[type]}</div>
+      <div class="num-value">${n}</div>
+      <div class="num-name">${t.numNames[n] || n}</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Analysis
+  const ag = document.getElementById('analysis-grid');
+  ag.innerHTML = '';
+  const destN = nums.destiny;
+  const det = t.numDetail[destN] || t.numDetail[9];
+
+  // Destiny
+  ag.innerHTML += `
+    <div class="analysis-card">
+      <span class="card-icon">⭐</span>
+      <div class="num-badge">${destN}</div>
+      <h3>${t.numLabels.destiny}</h3>
+      <p><span class="highlight">${t.numNames[destN]}</span><br><br>✨ ${det.light}<br><br>🌑 ${det.shadow}</p>
+    </div>
+    <div class="analysis-card">
+      <span class="card-icon">🌙</span>
+      <div class="num-badge">${nums.soul}</div>
+      <h3>${t.numLabels.soul}</h3>
+      <p>${(t.numDetail[nums.soul] || det).light}</p>
+    </div>
+    <div class="analysis-card">
+      <span class="card-icon">💼</span>
+      <h3>${t.sections.career.title}</h3>
+      <p>${det.career}</p>
+    </div>
+    <div class="analysis-card">
+      <span class="card-icon">💰</span>
+      <h3>${t.sections.money.title}</h3>
+      <p>${det.money}</p>
+    </div>
+    <div class="analysis-card full">
+      <span class="card-icon">♾️</span>
+      <div class="num-badge">${nums.karmic}</div>
+      <h3>${t.numLabels.karmic} — ${t.sections.karmic.title}</h3>
+      <p>${det.karmic}<br><br><em>${(t.numDetail[nums.karmic]||det).light}</em></p>
+    </div>
+  `;
+
+  // Compatibility
+  const compatList = t.compatibility[destN] || t.compatibility[9];
+  const tagLabels = {
+    excellent: currentLang==='ro'?'Excelent':'Άριστο',
+    good: currentLang==='ro'?'Bun':'Καλό',
+    challenging: currentLang==='ro'?'Provocator':'Δύσκολο',
+    karmic: currentLang==='ro'?'Karmic':'Καρμικό'
+  };
+  let compatHtml = '<div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">';
+  compatList.forEach(c => {
+    compatHtml += `
+      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:flex-start;gap:14px;">
+        <div style="font-family:'Cinzel Decorative',serif;font-size:1.5rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;min-width:28px;text-align:center;line-height:1;">${c.num}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px;">
+            <span style="font-family:'Philosopher',sans-serif;font-size:14px;color:var(--text);">${t.numNames[parseInt(c.num)]||c.num}</span>
+            <span class="tag ${c.type}">${tagLabels[c.type]}</span>
+          </div>
+          <div style="font-size:14px;color:var(--text2);line-height:1.6;">${c.desc}</div>
+        </div>
+      </div>`;
+  });
+  compatHtml += '</div>';
+  document.getElementById('compat-content').innerHTML = compatHtml;
+
+  // Missing numbers
+  const mc = document.getElementById('missing-content');
+  if (missing.length === 0) {
+    mc.innerHTML = `<p style="color:var(--accent)">${currentLang==='ro'?'Toate numerele sunt prezente în matricea ta! 🌟':'Όλοι οι αριθμοί είναι παρόντες στη μήτρα σου! 🌟'}</p>`;
+  } else {
+    mc.innerHTML = '<div class="missing-list">' + missing.map(n => `
+      <div class="missing-item" onclick="showMissingDetail(${n})">
+        <div class="mn">${n}</div>
+        <div class="ml">${t.numNames[n]||n}</div>
+      </div>
+    `).join('') + '</div>';
+    mc.innerHTML += `<p style="margin-top:14px;font-size:14px;color:var(--text2)">${missing.map(n => `<strong style="color:var(--accent)">${n}</strong>: ${t.missingDesc[n]}`).join('<br>')}</p>`;
+  }
+
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+
+function showModal(n) {
+  const t = T[currentLang];
+  const det = t.numDetail[n] || t.numDetail[9];
+  document.getElementById('modal-num').textContent = n;
+  document.getElementById('modal-title').textContent = (t.numNames[n] || '') + ' — ' + t.numLabels.destiny;
+  document.getElementById('modal-body').innerHTML = `
+    <div class="modal-section"><h4>${currentLang==='ro'?'Lumină':'Φως'}</h4><p>${det.light}</p></div>
+    <div class="modal-section"><h4>${currentLang==='ro'?'Umbră':'Σκιά'}</h4><p>${det.shadow}</p></div>
+    <div class="modal-section"><h4>${currentLang==='ro'?'Carieră':'Καριέρα'}</h4><p>${det.career}</p></div>
+    <div class="modal-section"><h4>${currentLang==='ro'?'Bani':'Χρήματα'}</h4><p>${det.money}</p></div>
+    <div class="modal-section"><h4>${currentLang==='ro'?'Lecție Karmică':'Καρμικό Μάθημα'}</h4><p>${det.karmic}</p></div>
+  `;
+  document.getElementById('modal').classList.add('open');
+}
+
+function showMissingDetail(n) {
+  showModal(n);
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal')) {
+    document.getElementById('modal').classList.remove('open');
+  }
+}
+</script>
+</body>
+</html>
