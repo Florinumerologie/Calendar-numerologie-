@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masca Socială – Luna Nașterii | Numerologie Vedică</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #8B6914;
+    --dark: #0A0A0F;
+    --dark2: #0F0F1A;
+    --dark3: #141428;
+    --ink: #1A1A2E;
+    --text: #E8E0D0;
+    --text-dim: #A09880;
+    --accent: #4A3F6B;
+    --crimson: #8B2252;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 10%, rgba(201,168,76,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 30%, rgba(201,168,76,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 75%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 20%, rgba(201,168,76,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 80%, rgba(255,255,255,0.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(201,168,76,0.2) 0%, transparent 100%),
+      radial-gradient(2px 2px at 35% 55%, rgba(201,168,76,0.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 48%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 50%, rgba(201,168,76,0.2) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(74,63,107,0.4) 0%, transparent 70%);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .brand {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-symbol {
+    font-size: 64px;
+    line-height: 1;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.4)); }
+    50% { filter: drop-shadow(0 0 35px rgba(201,168,76,0.7)); }
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(22px, 5vw, 42px);
+    font-weight: 400;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .hero-sub {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+
+  /* INTRO BOX */
+  .intro-box {
+    max-width: 820px;
+    margin: 50px auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .vedic-intro {
+    background: linear-gradient(135deg, rgba(74,63,107,0.2), rgba(138,104,20,0.1));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    padding: 36px 40px;
+    position: relative;
+  }
+
+  .vedic-intro::before {
+    content: '☽ ✦ ☾';
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--dark);
+    padding: 0 16px;
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 8px;
+  }
+
+  .vedic-intro h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .vedic-intro p {
+    color: var(--text-dim);
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  /* SECTION TITLE */
+  .section-label {
+    text-align: center;
+    margin: 60px auto 40px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--gold-light);
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .section-label p {
+    color: var(--text-dim);
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  .divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    margin: 16px auto;
+  }
+
+  /* MONTH CARDS */
+  .months-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .month-card {
+    background: linear-gradient(160deg, var(--dark2) 0%, var(--dark3) 100%);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: border-color 0.4s, transform 0.3s;
+    position: relative;
+  }
+
+  .month-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-3px);
+  }
+
+  .month-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--card-accent, var(--gold)), transparent);
+    opacity: 0.6;
+  }
+
+  .card-header {
+    padding: 28px 30px 20px;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .month-symbol {
+    font-size: 36px;
+    line-height: 1;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 8px rgba(201,168,76,0.3));
+  }
+
+  .month-info {}
+
+  .month-name {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+
+  .month-meta {
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .vedic-number {
+    margin-left: auto;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .card-body {
+    padding: 24px 30px 28px;
+  }
+
+  /* HOOK */
+  .hook-box {
+    background: rgba(201,168,76,0.04);
+    border-left: 2px solid var(--gold-dim);
+    padding: 14px 18px;
+    margin-bottom: 22px;
+    font-style: italic;
+    font-size: 15.5px;
+    color: var(--gold-light);
+    line-height: 1.7;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.1);
+  }
+
+  .section-content {
+    font-size: 15.5px;
+    color: var(--text-dim);
+    line-height: 1.85;
+    margin-bottom: 6px;
+  }
+
+  .section-content strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+  }
+
+  .tag.problem { border-color: rgba(139,34,82,0.4); color: #D4758A; }
+  .tag.solution { border-color: rgba(74,140,74,0.4); color: #8DC88D; }
+
+  /* PROBLEM / SOLUTION BLOCKS */
+  .dual-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .prob-block, .sol-block {
+    padding: 12px 14px;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .prob-block {
+    background: rgba(139,34,82,0.06);
+    border: 1px solid rgba(139,34,82,0.2);
+  }
+
+  .prob-block .block-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #D4758A;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .prob-block p { color: #C9909A; }
+
+  .sol-block {
+    background: rgba(74,140,74,0.05);
+    border: 1px solid rgba(74,140,74,0.2);
+  }
+
+  .sol-block .block-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #8DC88D;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .sol-block p { color: #9DC89D; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 60px 20px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-symbol { font-size: 32px; margin-bottom: 16px; color: var(--gold-dim); }
+
+  .footer p {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .dual-block { grid-template-columns: 1fr; }
+    .card-header { flex-wrap: wrap; }
+    .vedic-intro { padding: 28px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="brand">Flori Numerologie · Numerologie Vedică</div>
+  <div class="hero-symbol">🌙</div>
+  <h1>Masca Ta Socială<br>după Luna Nașterii</h1>
+  <p class="hero-sub">Cum te vede lumea, cum te comporți în societate și ce ascunzi cu adevărat — prin ochii Numerologiei Vedice</p>
+</section>
+
+<!-- INTRO VEDIC -->
+<div class="intro-box">
+  <div class="vedic-intro">
+    <h2>De ce Luna Nașterii în Numerologia Vedică?</h2>
+    <p>În tradiția Vedică, <strong>luna nașterii</strong> nu este un simplu număr calendaristic — este <em>Chandra</em>, energia lunară care modelează felul în care ne prezentăm lumii. Spre deosebire de numărul destinului (care arată cine ești interior), luna nașterii reflectă <strong>masca socială</strong> — imaginea pe care o proiectezi, modul în care ești perceput și comportamentul tău în spațiul public. Este interfața dintre sufletul tău și societate.</p>
+  </div>
+</div>
+
+<!-- SECTION TITLE -->
+<div class="section-label">
+  <h2>Cele 12 Luni · 12 Măști</h2>
+  <div class="divider"></div>
+  <p>Descoperă-ți archetipul social lunar</p>
+</div>
+
+<!-- CARDS GRID -->
+<div class="months-grid">
+
+  <!-- IANUARIE -->
+  <div class="month-card" style="--card-accent: #C9A84C;">
+    <div class="card-header">
+      <div class="month-symbol">❄️</div>
+      <div class="month-info">
+        <div class="month-name">Ianuarie</div>
+        <div class="month-meta">Luna 1 · Soarele Vedic</div>
+      </div>
+      <div class="vedic-number">1</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Ești lider chiar și când nu vrei să fii. Oamenii te urmează — tu nu știi de ce."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Societatea te vede ca pe un <strong>om puternic, independent, cu autoritate naturală</strong>. Pari sigur pe tine chiar și atunci când ești plin de îndoieli. Proiectezi stăpânire de sine, viziune și curaj. Lumea presupune automat că ești lider și îți deleagă responsabilități fără să te întrebe.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>direct, hotărât și eficient</strong>. Nu tolerezi ambiguitatea și preferi acțiunea în locul discuțiilor. În grupuri, preiei controlul instinctiv — chiar și când nu intenționezi. Relațiile sociale sunt pentru tine instrumente de realizare, nu de conexiune emoțională.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Sub masca autorității se ascunde o <strong>frică profundă de a nu fi suficient de bun</strong>. Nevoia de validare este enormă, dar o disimulezi în spatele independenței afișate.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Izolarea. Cu cât pari mai puternic, cu atât oamenii se feresc să îți ofere sprijin. Ajungi să porți totul singur și să te epuizezi.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Practică vulnerabilitatea selectivă. Cere ajutor în mod conștient. Aceasta nu slăbește — consolidează autoritatea autentică.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEBRUARIE -->
+  <div class="month-card" style="--card-accent: #9B8FD4;">
+    <div class="card-header">
+      <div class="month-symbol">🌊</div>
+      <div class="month-info">
+        <div class="month-name">Februarie</div>
+        <div class="month-meta">Luna 2 · Chandra · Senzitivitate</div>
+      </div>
+      <div class="vedic-number">2</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Toată lumea vine la tine cu problemele lor. Tu zâmbești. Dar cine vine la tine?"
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>omul empatic, blând, echilibrat</strong> — cel care ascultă, mediază și aduce pace. Societatea te consideră <em>omul de bază</em>, coloana vertebrală din umbră a oricărui grup. Pari calm, cooperant și fără conflicte.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>diplomat și atent la nevoile celorlalți</strong>, uneori în detrimentul propriilor nevoi. Eviți conflictele aproape instinctiv. Ești cel care face grupul să funcționeze fără să fie văzut că face ceva. Lucrezi excelent în parteneriat.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Ascunzi <strong>intensitatea emoțională și sensibilitatea extremă</strong>. Te rănești profund la cel mai mic cuvânt aspru, dar nu arăți niciodată. Frica de respingere te face să te șteargă pe tine însuți din ecuație.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Codependența. Dai atât de mult celorlalți încât te pierzi pe tine. Devii invizibil în propria ta viață.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Stabilește limite din iubire, nu din frică. Acordă-ți ție însuți empatia pe care o oferi altora.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARTIE -->
+  <div class="month-card" style="--card-accent: #E8C97A;">
+    <div class="card-header">
+      <div class="month-symbol">🌸</div>
+      <div class="month-info">
+        <div class="month-name">Martie</div>
+        <div class="month-meta">Luna 3 · Jupiter · Expansiune</div>
+      </div>
+      <div class="vedic-number">3</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Luminezi orice cameră în care intri. Dar acasă, singur, nu știi ce să faci cu tine."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>carismatic, creativ, plin de viață</strong> — soul of the party. Oamenii gravitează natural spre tine. Pari optimist, inspirator, mereu cu o poveste bună. Societatea te asociază cu bucuria și creativitatea.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>comunicativ, expresiv și magnetic</strong>. Faci conexiuni rapide și aduci energie pozitivă în grupuri. Uiți ușor conflictele și ești perceput ca om fără ranchiună. Excelezi în roluri publice, în artă și în comunicare.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Sub carisma socială se ascunde o <strong>singuratate profundă și o teamă de superficialitate proprie</strong>. Te întrebi dacă cineva te vede cu adevărat dincolo de show.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Dispersia energiei. Ești pretutindeni și nicăieri. Începi mult, termini puțin. Superficialitatea devine o capcană.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Canalizează creativitatea spre un proiect principal. Cultivă relații de profunzime, nu doar conexiuni largi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APRILIE -->
+  <div class="month-card" style="--card-accent: #8B8B7A;">
+    <div class="card-header">
+      <div class="month-symbol">🏔️</div>
+      <div class="month-info">
+        <div class="month-name">Aprilie</div>
+        <div class="month-meta">Luna 4 · Rahu · Structură</div>
+      </div>
+      <div class="vedic-number">4</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Ești stânca pe care se sprijină toți. Dar cine știe că și stâncile obosesc?"
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>om de nădejde, stabil, muncitor, organizat</strong>. Societatea te respectă pentru seriozitate și consecvență. Ești cel pe care se poate conta. Proiectezi siguranță, disciplină și responsabilitate.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>metodic, precis și orientat spre rezultate concrete</strong>. Nu faci promisiuni pe care nu le poți ține. Preferi acțiunea dovedită în fața vorbelor frumoase. Ești sceptic față de schimbare și construiești lent, dar solid.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Ascunzi un <strong>sentiment profund de nedreptate și o frustrare acumulată</strong>. Simți că muncești de două ori mai mult decât alții și ești recunoscut de două ori mai puțin. Te rebelezi interior.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Rigiditatea. Respingi inovația și te blochezi în rutine care nu mai servesc. Rezistența la schimbare devine autosabotaj.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Privește schimbarea ca pe o fundație nouă, nu ca pe o distrugere. Stabilitatea vine din adaptare, nu din imobilitate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAI -->
+  <div class="month-card" style="--card-accent: #D4A853;">
+    <div class="card-header">
+      <div class="month-symbol">⚡</div>
+      <div class="month-info">
+        <div class="month-name">Mai</div>
+        <div class="month-meta">Luna 5 · Mercur · Libertate</div>
+      </div>
+      <div class="vedic-number">5</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Ești mereu în mișcare. Dar nu știi dacă fugi de ceva sau alergi spre ceva."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>liber, aventurier, versatil și fascinant</strong>. Societatea te admiră pentru curajul de a încerca lucruri noi și pentru adaptabilitate. Pari mereu tânăr, dinamic, plin de idei. Ești omul cu o mie de fețe.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>cameleon social</strong> — te adaptezi la orice grup, orice situație. Faci conexiuni instant și te plictisești rapid. Schimbi direcția brusc și acționezi pe impuls. Ești cel mai interesant om din cameră și cel mai imprevizibil.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Sub libertatea afișată se ascunde o <strong>frică profundă de angajament și de a fi prins</strong>. Mișcarea continuă este uneori o fugă de profunzime și de responsabilitate.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Haosul cronic. Lipsa de consecvență distruge relațiile și oportunitățile. Libertatea devenită dezordine.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Înțelege că angajamentul față de un lucru nu înseamnă pierderea libertății — înseamnă profunzime. Alege o ancoră.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IUNIE -->
+  <div class="month-card" style="--card-accent: #C87DB8;">
+    <div class="card-header">
+      <div class="month-symbol">🌹</div>
+      <div class="month-info">
+        <div class="month-name">Iunie</div>
+        <div class="month-meta">Luna 6 · Venus · Armonie</div>
+      </div>
+      <div class="vedic-number">6</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Toată lumea crede că ești bine. Tu ești expertul în a fi bine pentru toți ceilalți."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>om cald, grijuliu, estetic și armonios</strong>. Societatea te asociază cu frumosul, cu grija față de familie și comunitate. Pari echilibrat, elegant, mereu preocupat de bunăstarea celorlalți.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>protector, responsabil și orientat spre comunitate</strong>. Îți asumi în mod natural rolul de îngrijitor. Ești cel care organizează, mediază și creează armonie. Judecă estetic tot ce te înconjoară.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Ascunzi <strong>epuizarea din spatele rolului de salvator</strong> și o nevoie imensă de a fi iubit, nu doar apreciat pentru ceea ce faci. Te temi că fără utilitate nu mai ești dorit.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Martyrdom-ul. Sacrificiul excesiv ajunge la resentiment. Dai până te golești și apoi te simți neapreciat.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Grija de sine nu e egoism — e condiția pentru a putea îngriji cu adevărat. Umple paharul tău mai întâi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IULIE -->
+  <div class="month-card" style="--card-accent: #6BB8D4;">
+    <div class="card-header">
+      <div class="month-symbol">🔮</div>
+      <div class="month-info">
+        <div class="month-name">Iulie</div>
+        <div class="month-meta">Luna 7 · Ketu · Mister</div>
+      </div>
+      <div class="vedic-number">7</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Ești cel mai interesant om pe care îl cunosc. Și cel pe care îl cunosc cel mai puțin."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>misterios, inteligent, contemplativ și inaccesibil</strong>. Societatea te percepe ca pe un om profund, poate excentric, cu un univers interior fascinant. Pari că știi mai mult decât spui.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>observator tăcut și analist profund</strong>. Preferi calitatea relațiilor în locul cantității. Ești selectiv cu energia și cu cuvintele. Grupurile mari te epuizează. Strălucești în conversații profunde, unu-la-unu.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Ascunzi o <strong>singuratate accentuată și dificultatea de a te conecta emoțional</strong>. Misterul este uneori un zid, nu o alegere. Îți dorești conectare profundă dar nu știi cum să o primești.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Izolarea intelectuală. Analizezi atât de mult că nu mai trăiești. Zidul de mister ține lumea la distanță.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Îndrăznește să fii văzut. Vulnerabilitatea selectivă nu te diminuează — te umanizează și atrage conexiunile autentice.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUGUST -->
+  <div class="month-card" style="--card-accent: #D4884C;">
+    <div class="card-header">
+      <div class="month-symbol">👑</div>
+      <div class="month-info">
+        <div class="month-name">August</div>
+        <div class="month-meta">Luna 8 · Saturn · Putere</div>
+      </div>
+      <div class="vedic-number">8</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Ai construit un imperiu. Dar nimeni nu știe ce preț ai plătit pentru el."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>om de succes, autoritar, ambițios și cu putere</strong>. Societatea te respectă și uneori se teme de tine. Proiectezi control, eficiență și capacitate de realizare materială. Ești asociat cu puterea și succesul.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>strategic, orientat spre rezultat și gândești pe termen lung</strong>. Nu te joci — ești serios în ambițiile tale. Ești magnet pentru oameni care vor să se asocieze cu puterea. Gestionezi presiunea cu stoicism aparent.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Ascunzi o <strong>povară karmică profundă și teama că nu meriți ceea ce ai construit</strong>. Sindromul impostorului sub armura de succes. Pierderile grele te-au format dar nu le arăți nimănui.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Obsesia pentru control și putere duce la relații de dominanță, nu de iubire. Succesul exterior dar vid interior.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Separarea valorii personale de realizările materiale. Puterea adevărată vine din interior, nu din exterior.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEPTEMBRIE -->
+  <div class="month-card" style="--card-accent: #7DB88A;">
+    <div class="card-header">
+      <div class="month-symbol">🌿</div>
+      <div class="month-info">
+        <div class="month-name">Septembrie</div>
+        <div class="month-meta">Luna 9 · Marte · Înțelepciune</div>
+      </div>
+      <div class="vedic-number">9</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Ai văzut atât de mult încât ai uitat să mai simți. Dar lumea vine la tine pentru înțelepciune."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>înțelept, altruist, compasiv și universal</strong>. Societatea te percepe ca pe un om cu viziune largă, deasupra micilor interese. Ești omul care privește tabloul mare. Pari dezinteresat și nobil.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>idealist, implicat în cauze mari și inspirator pentru ceilalți</strong>. Dai fără să numeri. Ești atras de diversitate și de culturi diferite. Gândești global, acționezi cu generozitate. Ești un maestru al conexiunilor umane.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Ascunzi <strong>dezamăgirile adânci de la oameni și sentimentul că ești înțeles greșit</strong>. Universalismul este uneori o fugă de relațiile individuale dificile. Durere veche, nedepășită.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Sacrificiul fără discriminare. Dai tuturor și rămâi fără resurse. Dezamăgirile repetate duc la cinism — opusul naturii tale.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Compasiunea începe cu tine. Ajutorul acordat cu limite clare este mai sustenabil și mai autentic decât sacrificiul total.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OCTOMBRIE -->
+  <div class="month-card" style="--card-accent: #C9A84C;">
+    <div class="card-header">
+      <div class="month-symbol">⚖️</div>
+      <div class="month-info">
+        <div class="month-name">Octombrie</div>
+        <div class="month-meta">Luna 1/10 · Soarele · Echilibru</div>
+      </div>
+      <div class="vedic-number">1</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Pari că ai toate răspunsurile. Dar tu cauți mereu echilibrul perfect care nu există."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>om elegant, echilibrat, diplomat și rafinat</strong>. Societatea apreciază gustul tău estetic și capacitatea de a crea armonie. Pari că ai viața bine pusă la punct, că știi ce vrei și cum să obții.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>atent la aparențe și la modul în care ești perceput</strong>. Ești mediator natural și ai abilități de negociere. Iei decizii cu dificultate — cântărești mult. Ești plăcut, sociabil și apreciezi parteneriatul.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Ascunzi o <strong>indecizibilitate cronică și teama că orice alegere înseamnă pierdere</strong>. Sub eleganța socială se zbate cineva care nu știe niciodată sigur ce vrea cu adevărat.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Paralizia prin analiză. Căutarea echilibrului perfect blochează acțiunea. Placi tuturor și nu te mulțumești pe tine.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Echilibrul nu este static — este dinamic. Acționează, corectează, avansează. Decizia imperfectă bate indecizia perfectă.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOIEMBRIE -->
+  <div class="month-card" style="--card-accent: #8B5A8B;">
+    <div class="card-header">
+      <div class="month-symbol">🦂</div>
+      <div class="month-info">
+        <div class="month-name">Noiembrie</div>
+        <div class="month-meta">Luna 11/2 · Chandra · Transformare</div>
+      </div>
+      <div class="vedic-number">2</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Ai murit și te-ai renăscut de atâtea ori încât lumea nu știe cu cine vorbește de fapt."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>intens, magnetic, penetrant și transformator</strong>. Societatea simte că ești diferit — că ai trăit mai mult decât arăți. Proiectezi o putere subtilă, o profunzime psihologică și o intensitate care fascinează sau intimidează.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>strategic, observator și rareori la suprafață</strong>. Citești oamenii cu precizie și folosești această cunoaștere cu înțelepciune. Ești loial până la capăt — sau nu ești deloc. Nu există gri în relațiile tale.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Ascunzi <strong>răni vechi, transformări dureroase și o nevoie de control</strong> care vine din frică. Intensitatea ta socială este o armură construită din suferință transformată în forță.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Manipularea inconștientă și obsesia de control. Transformi totul, inclusiv relațiile, în teste de putere.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Permite vulnerabilitatea. Controlul vine din frică; încrederea vine din putere autentică. Lasă oamenii să te vadă.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECEMBRIE -->
+  <div class="month-card" style="--card-accent: #7BAFD4;">
+    <div class="card-header">
+      <div class="month-symbol">🏹</div>
+      <div class="month-info">
+        <div class="month-name">Decembrie</div>
+        <div class="month-meta">Luna 12/3 · Jupiter · Libertate</div>
+      </div>
+      <div class="vedic-number">3</div>
+    </div>
+    <div class="card-body">
+      <div class="hook-box">
+        „Cauți adevărul în toate locurile. Dar adevărul tău cel mai mare e că tu ești suficient."
+      </div>
+
+      <div class="section-title">Masca Socială</div>
+      <div class="section-content">
+        Ești văzut ca <strong>filosof, aventurier, optimist și vizionar</strong>. Societatea te admiră pentru deschiderea ta mentală și pentru capacitatea de a inspira. Pari că trăiești pentru idei mari, pentru călătorii și pentru libertate.
+      </div>
+
+      <div class="section-title">Cum te comporți în societate</div>
+      <div class="section-content">
+        Ești <strong>expansiv, entuziast și mereu în căutare de sens</strong>. Aduci perspectivă acolo unde alții văd doar detalii. Ești generos cu ideile și cu spiritul. Urăști limitele și regulile impuse. Ești profesorul, exploratorul, predicatorul.
+      </div>
+
+      <div class="section-title">Ce ascunzi cu adevărat</div>
+      <div class="section-content">
+        Ascunzi o <strong>fugă de responsabilitățile concrete și o nesiguranță despre propria valoare</strong>. Căutarea continuă de sens poate fi o evitare a construcției concrete.
+      </div>
+
+      <div class="section-title">Problema principală</div>
+      <div class="dual-block">
+        <div class="prob-block">
+          <div class="block-label">⚠ Capcana</div>
+          <p>Exces de promisiuni, deficit de urmărire. Lipsa de disciplină transformă visele în frustrări. Fuga de cotidian.</p>
+        </div>
+        <div class="sol-block">
+          <div class="block-label">✦ Rezolvarea</div>
+          <p>Libertatea autentică vine din stăpânire, nu din evitare. Construiește o disciplină minimă care să susțină viziunea.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end months-grid -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-symbol">✦</div>
+  <p>Flori Numerologie · Numerologie Vedică Profundă</p>
+  <br>
+  <p style="font-size:10px; margin-top:8px;">Masca socială nu este ce ești — este puntea dintre sufletul tău și lume</p>
+</div>
+
+</body>
+</html>
