@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator Numerologie — Flori Barcău · Cifrul Vieții</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #03010a;
+    --dark: #080518;
+    --purple: #1a0a35;
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --gold-glow: #ffd700;
+    --silver: #a8b4c8;
+    --white: #f0eaff;
+    --star: #e8d5ff;
+    --accent: #6b21a8;
+    --glow: rgba(201, 168, 76, 0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    color: var(--white);
+    font-family: 'Crimson Pro', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 10%, rgba(240,208,128,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 85% 45%, rgba(240,208,128,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(240,208,128,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 55%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 48% 35%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 62%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 88%, rgba(255,255,255,0.6) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(107,33,168,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 0% 100%, rgba(26,10,53,0.8) 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 50%, rgba(201,168,76,0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 40px 0 32px;
+  }
+
+  .header-symbol {
+    font-size: 48px;
+    margin-bottom: 12px;
+    animation: pulse-glow 3s ease-in-out infinite;
+    display: block;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(201,168,76,0.6)); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 20px rgba(201,168,76,1)); transform: scale(1.05); }
+  }
+
+  .brand {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(10px, 3vw, 13px);
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(20px, 6vw, 32px);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--silver);
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .divider span { color: var(--gold); font-size: 18px; }
+
+  /* Input Card */
+  .input-card {
+    background: linear-gradient(135deg, rgba(26,10,53,0.9), rgba(8,5,24,0.95));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 20px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 0 40px rgba(107,33,168,0.2), inset 0 1px 0 rgba(201,168,76,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .input-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(201,168,76,0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .input-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+    text-align: center;
+    display: block;
+  }
+
+  .date-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .date-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .date-group label {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  .date-group select, .date-group input {
+    background: rgba(3,1,10,0.8);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+    padding: 12px 8px;
+    text-align: center;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+  }
+
+  .date-group select:focus, .date-group input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 12px rgba(201,168,76,0.3);
+  }
+
+  .date-group select option {
+    background: #1a0a35;
+    color: var(--white);
+  }
+
+  .calc-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #7c3a0a, var(--gold), #7c3a0a);
+    background-size: 200% auto;
+    border: none;
+    border-radius: 14px;
+    color: var(--deep);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.4s;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+  }
+
+  .calc-btn:hover {
+    background-position: right center;
+    box-shadow: 0 6px 30px rgba(201,168,76,0.6);
+    transform: translateY(-1px);
+  }
+
+  .calc-btn:active { transform: translateY(0); }
+
+  /* Results */
+  .results {
+    display: none;
+    animation: fadeIn 0.6s ease;
+  }
+
+  .results.show { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Number Display */
+  .number-hero {
+    text-align: center;
+    padding: 32px 24px;
+    background: linear-gradient(135deg, rgba(26,10,53,0.95), rgba(8,5,24,0.98));
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .number-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  }
+
+  .number-big {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(64px, 20vw, 100px);
+    font-weight: 900;
+    background: linear-gradient(180deg, var(--gold-light), var(--gold), #8b6914);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    filter: drop-shadow(0 0 20px rgba(201,168,76,0.5));
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .number-master-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #7c1fa8, #c026d3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-family: 'Cinzel Decorative', serif;
+    box-shadow: 0 0 20px rgba(192,38,211,0.5);
+  }
+
+  .number-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(16px, 5vw, 22px);
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+
+  .number-tagline {
+    font-size: 16px;
+    color: var(--silver);
+    font-style: italic;
+    opacity: 0.9;
+  }
+
+  /* Section Cards */
+  .section-card {
+    background: linear-gradient(135deg, rgba(26,10,53,0.85), rgba(8,5,24,0.9));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 22px 20px;
+    margin-bottom: 14px;
+    transition: border-color 0.3s;
+  }
+
+  .section-card:hover { border-color: rgba(201,168,76,0.4); }
+
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-icon { font-size: 18px; }
+
+  .profile-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--star);
+  }
+
+  /* Lists */
+  .trait-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .trait-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--star);
+  }
+
+  .trait-list li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 12px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .trait-list.negative li::before { content: '◇'; color: var(--silver); }
+  .trait-list.avoid li::before { content: '✗'; color: #ef4444; }
+
+  /* Mini Cards Row */
+  .mini-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .mini-card {
+    background: linear-gradient(135deg, rgba(26,10,53,0.85), rgba(8,5,24,0.9));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 14px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+
+  .mini-card-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 28px;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .mini-card-label {
+    font-size: 11px;
+    color: var(--silver);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .mini-card-text {
+    font-size: 13px;
+    color: var(--star);
+    font-style: italic;
+  }
+
+  /* Ziua cifrei */
+  .today-card {
+    background: linear-gradient(135deg, rgba(107,33,168,0.3), rgba(26,10,53,0.9));
+    border: 1px solid rgba(107,33,168,0.5);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .today-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 11px;
+    color: var(--silver);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .today-number {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 48px;
+    color: var(--gold-light);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 0 12px rgba(201,168,76,0.6));
+  }
+
+  .today-name {
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+
+  .today-energy {
+    font-size: 14px;
+    color: var(--silver);
+    line-height: 1.6;
+  }
+
+  /* Compatibility */
+  .compat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .compat-item {
+    text-align: center;
+    padding: 10px 6px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .compat-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 22px;
+    color: var(--gold);
+    display: block;
+  }
+
+  .compat-stars { font-size: 10px; color: var(--gold); display: block; }
+  .compat-desc { font-size: 11px; color: var(--silver); display: block; margin-top: 2px; }
+
+  /* Master number section */
+  .master-section {
+    background: linear-gradient(135deg, rgba(124,31,168,0.25), rgba(26,10,53,0.9));
+    border: 1px solid rgba(192,38,211,0.4);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 14px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(192,38,211,0.15);
+  }
+
+  .master-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 13px;
+    color: #d946ef;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .master-num-display {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 52px;
+    background: linear-gradient(135deg, #e879f9, #c026d3, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 0 15px rgba(192,38,211,0.6));
+  }
+
+  .master-desc {
+    font-size: 15px;
+    color: var(--star);
+    line-height: 1.6;
+  }
+
+  /* Footer brand */
+  .footer-brand {
+    text-align: center;
+    padding: 32px 0 20px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    margin-top: 32px;
+  }
+
+  .footer-brand p {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+  }
+
+  /* Error */
+  .error-msg {
+    color: #ef4444;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    display: none;
+  }
+
+  .error-msg.show { display: block; }
+
+  /* Ritual box */
+  .ritual-box {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(26,10,53,0.9));
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .ritual-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .ritual-text {
+    font-size: 16px;
+    color: var(--star);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Scroll to top */
+  .scroll-hint {
+    text-align: center;
+    font-size: 13px;
+    color: var(--silver);
+    opacity: 0.5;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <span class="header-symbol">✦</span>
+    <div class="brand">Psihonumerologie</div>
+    <h1>Cifrul Vieții Tale</h1>
+    <p class="subtitle">Descoperă misiunea ta numerologică</p>
+  </div>
+
+  <div class="divider"><span>✦</span></div>
+
+  <!-- Input -->
+  <div class="input-card">
+    <span class="input-label">✦ Introdu Data Ta de Naștere ✦</span>
+    <div class="date-row">
+      <div class="date-group">
+        <label>Ziua</label>
+        <select id="ziua">
+          <option value="">ZI</option>
+        </select>
+      </div>
+      <div class="date-group">
+        <label>Luna</label>
+        <select id="luna">
+          <option value="">LUNĂ</option>
+          <option value="1">Ian</option>
+          <option value="2">Feb</option>
+          <option value="3">Mar</option>
+          <option value="4">Apr</option>
+          <option value="5">Mai</option>
+          <option value="6">Iun</option>
+          <option value="7">Iul</option>
+          <option value="8">Aug</option>
+          <option value="9">Sep</option>
+          <option value="10">Oct</option>
+          <option value="11">Nov</option>
+          <option value="12">Dec</option>
+        </select>
+      </div>
+      <div class="date-group">
+        <label>Anul</label>
+        <input type="number" id="an" placeholder="AAAA" min="1900" max="2024">
+      </div>
+    </div>
+    <div class="error-msg" id="errorMsg">⚠ Te rog introdu o dată de naștere validă!</div>
+    <button class="calc-btn" onclick="calculeaza()">✦ Calculează Cifrul Vieții ✦</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+
+    <!-- Cifra Vieții -->
+    <div class="number-hero" id="numberHero">
+      <span class="number-big" id="numBig"></span>
+      <div id="masterBadge" style="display:none" class="number-master-badge">✦ Număr Maestru ✦</div>
+      <div class="number-name" id="numName"></div>
+      <div class="number-tagline" id="numTagline"></div>
+    </div>
+
+    <!-- Mini cards: cifra zilei + luna -->
+    <div class="mini-cards">
+      <div class="mini-card">
+        <span class="mini-card-label">Cifra Zilei</span>
+        <span class="mini-card-num" id="cifraZilei"></span>
+        <span class="mini-card-text" id="cifraZileiText"></span>
+      </div>
+      <div class="mini-card">
+        <span class="mini-card-label">Cifra Lunii</span>
+        <span class="mini-card-num" id="cifraLunii"></span>
+        <span class="mini-card-text" id="cifraLuniiText"></span>
+      </div>
+    </div>
+
+    <!-- Master number alert -->
+    <div class="master-section" id="masterSection" style="display:none">
+      <div class="master-title">✦ Număr Maestru Detectat ✦</div>
+      <span class="master-num-display" id="masterNumDisplay"></span>
+      <div class="master-desc" id="masterDesc"></div>
+    </div>
+
+    <!-- Profil Psihologic -->
+    <div class="section-card">
+      <div class="section-title"><span class="section-icon">🔮</span> Profil Psihologic</div>
+      <p class="profile-text" id="profilText"></p>
+    </div>
+
+    <!-- Puncte Tari -->
+    <div class="section-card">
+      <div class="section-title"><span class="section-icon">✨</span> Puncte Tari</div>
+      <ul class="trait-list" id="puncteTari"></ul>
+    </div>
+
+    <!-- Puncte Slabe -->
+    <div class="section-card">
+      <div class="section-title"><span class="section-icon">🌙</span> Puncte Slabe</div>
+      <ul class="trait-list negative" id="puncteSlabe"></ul>
+    </div>
+
+    <!-- Sănătate & Bani -->
+    <div class="mini-cards">
+      <div class="section-card" style="margin:0">
+        <div class="section-title" style="font-size:11px"><span class="section-icon">💚</span> Sănătate</div>
+        <p class="profile-text" style="font-size:14px" id="sanatate"></p>
+      </div>
+      <div class="section-card" style="margin:0">
+        <div class="section-title" style="font-size:11px"><span class="section-icon">💰</span> Bani</div>
+        <p class="profile-text" style="font-size:14px" id="bani"></p>
+      </div>
+    </div>
+
+    <div style="height:14px"></div>
+
+    <!-- Ce să nu faci -->
+    <div class="section-card">
+      <div class="section-title"><span class="section-icon">🚫</span> Ce Să Nu Faci</div>
+      <ul class="trait-list avoid" id="nuFace"></ul>
+    </div>
+
+    <!-- Ritual -->
+    <div class="ritual-box">
+      <div class="ritual-title">✦ Ritualul Tău ✦</div>
+      <div class="ritual-text" id="ritual"></div>
+    </div>
+
+    <!-- Compatibilitate -->
+    <div class="section-card">
+      <div class="section-title"><span class="section-icon">💜</span> Compatibilitate</div>
+      <div class="compat-grid" id="compatGrid"></div>
+    </div>
+
+    <div class="divider"><span>✦</span></div>
+
+    <!-- Cifra Zilei Cosmice -->
+    <div class="today-card">
+      <div class="today-label">✦ Energia Cosmică de Azi ✦</div>
+      <span class="today-number" id="todayNum"></span>
+      <div class="today-name" id="todayName"></div>
+      <div class="today-energy" id="todayEnergy"></div>
+    </div>
+
+    <!-- Email Button -->
+    <button class="calc-btn" onclick="trimiteEmail()" style="margin-top:8px; background: linear-gradient(135deg, #1a0a35, #4a1a8a, #1a0a35);">
+      📧 Trimite Analiza pe Email
+    </button>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-brand">
+    <p>Psihonumerologie · Flori Barcău · Cifrul Vieții</p>
+  </div>
+
+</div>
+
+<script>
+// Populate days
+const ziuaSelect = document.getElementById('ziua');
+for (let i = 1; i <= 31; i++) {
+  const opt = document.createElement('option');
+  opt.value = i;
+  opt.textContent = i < 10 ? '0' + i : i;
+  ziuaSelect.appendChild(opt);
+}
+
+function reduce(n, keepMaster = true) {
+  if (keepMaster && (n === 11 || n === 22 || n === 33)) return n;
+  while (n > 9) {
+    n = String(n).split('').reduce((a, b) => a + parseInt(b), 0);
+    if (keepMaster && (n === 11 || n === 22 || n === 33)) return n;
+  }
+  return n;
+}
+
+function sumDigits(n) {
+  return String(n).split('').reduce((a, b) => a + parseInt(b), 0);
+}
+
+function getCifraVietii(zi, luna, an) {
+  let total = sumDigits(zi) + sumDigits(luna) + sumDigits(an);
+  return reduce(total);
+}
+
+const profiles = {
+  1: {
+    name: 'Liderul', tagline: 'Pionierul. Creatorul. Cel care merge primul.',
+    profil: 'Ești un suflet independent, născut să conducă și să inițieze. Ai o voință de fier și o dorință profundă de a-ți crea propriul drum. Natura ta este curajoasă, inovatoare și determinată. Ești cel care vede oportunități acolo unde alții văd obstacole.',
+    tari: ['Lider natural și vizionar', 'Curaj și determinare extraordinare', 'Independență și originalitate', 'Inițiativă și capacitate de acțiune', 'Creativitate și inovație'],
+    slabe: ['Tendință spre egocentrism', 'Dificultate în a colabora', 'Nerăbdare și impulsivitate', 'Rigiditate în opinii'],
+    sanatate: 'Zona capului și ochilor este sensibilă. Meditația zilnică îți echilibrează energia.',
+    bani: 'Banii vin prin inițiative proprii și antreprenoriat. Nu lucra pentru alții — construiește!',
+    nuFace: ['Nu te lăsa dominat de alții', 'Nu ignora echipa ta', 'Nu acționa din orgoliu'],
+    ritual: 'În fiecare dimineață, spune de 3 ori: "Eu sunt liderul propriei mele vieți." Vizualizează-te reușind.',
+    compat: { bun: [1, 3, 5], mediu: [2, 9], dificil: [4, 6] },
+    planeta: 'Soare', culoare: 'Auriu'
+  },
+  2: {
+    name: 'Diplomaticul', tagline: 'Sufletul păcii. Maestrul relațiilor.',
+    profil: 'Ești sensibil, empatic și înzestrat cu o intuiție profundă. Rolul tău este să aduci armonie și echilibru în orice situație. Simți energiile celor din jur ca nimeni altul și ai darul de a înțelege ambele părți ale oricărui conflict.',
+    tari: ['Empatie și sensibilitate profundă', 'Abilitate diplomatică excepțională', 'Intuiție puternică', 'Răbdare și tact', 'Talent pentru relații și parteneriate'],
+    slabe: ['Hipersensibilitate la critici', 'Dependență emoțională', 'Dificultate în luarea deciziilor', 'Tendința de a evita conflictele'],
+    sanatate: 'Sistemul nervos și stomacul sunt zonele de atenție. Evită stresul și mediile toxice.',
+    bani: 'Banii vin prin parteneriate și colaborări. Cel mai bine funcționezi cu un asociat de încredere.',
+    nuFace: ['Nu te sacrifica excesiv pentru alții', 'Nu evita conversațiile dificile', 'Nu lua toate deciziile cu inima'],
+    ritual: 'Seara, înainte de somn, respiră adânc de 7 ori și eliberează orice energie negativă preluată în acea zi.',
+    compat: { bun: [2, 4, 8], mediu: [1, 6], dificil: [5, 7] },
+    planeta: 'Luna', culoare: 'Argintiu'
+  },
+  3: {
+    name: 'Creatorul', tagline: 'Bucuria. Expresia. Lumina.',
+    profil: 'Ești o sursă inepuizabilă de creativitate, bucurie și inspirație. Comunicarea este cel mai puternic instrument al tău. Ai darul de a transforma orice situație cu umor și optimism. Lumea devine mai frumoasă oriunde mergi.',
+    tari: ['Creativitate și imaginație bogată', 'Comunicare charismatică', 'Optimism și bucurie de trăit', 'Talent artistic natural', 'Sociabilitate și magnetism'],
+    slabe: ['Dispersia energiei în prea multe proiecte', 'Superficialitate uneori', 'Dificultate în a termina ce a început', 'Evitarea responsabilităților'],
+    sanatate: 'Zona gâtului și corzilor vocale. Cântatul și exprimarea artistică te vindecă.',
+    bani: 'Banii vin prin creativitate, artă, comunicare. Transformă pasiunea în profesie!',
+    nuFace: ['Nu te împrăștia în prea multe direcții', 'Nu evita disciplina', 'Nu neglija detaliile importante'],
+    ritual: 'Scrie zilnic 3 lucruri frumoase pe care le-ai creat sau trăit. Arta te reîncarcă.',
+    compat: { bun: [1, 3, 9], mediu: [5, 6], dificil: [4, 7] },
+    planeta: 'Jupiter', culoare: 'Galben'
+  },
+  4: {
+    name: 'Constructorul', tagline: 'Stabilitate. Muncă. Fundație solidă.',
+    profil: 'Ești pilonul de stabilitate al oricărui sistem. Muncitor, disciplinat și de neclintit, construiești cu răbdare ceea ce alții visează. Ai o capacitate remarcabilă de organizare și o etică a muncii pe care puțini o egalează.',
+    tari: ['Disciplină și organizare exemplare', 'Fiabilitate și loialitate', 'Gândire practică și metodică', 'Răbdare și perseverență', 'Simț al responsabilității'],
+    slabe: ['Rigiditate și rezistență la schimbare', 'Dependență de muncă', 'Dificultate în exprimarea emoțiilor', 'Tendința spre rutină excesivă'],
+    sanatate: 'Oasele, coloana și articulațiile necesită atenție. Mișcarea zilnică este esențială.',
+    bani: 'Banii vin prin muncă sistematică și investiții pe termen lung. Nu juca la noroc.',
+    nuFace: ['Nu fi prea rigid în planuri', 'Nu neglija odihn și relaxarea', 'Nu te lăsa copleșit de perfecționism'],
+    ritual: 'Dimineața, organizează-ți ziua în 3 priorități clare. Seara, bifează ce ai realizat.',
+    compat: { bun: [2, 4, 8], mediu: [6, 7], dificil: [1, 5] },
+    planeta: 'Uranus', culoare: 'Verde'
+  },
+  5: {
+    name: 'Exploratorul', tagline: 'Libertate. Aventură. Schimbare.',
+    profil: 'Ești spiritul liber al numerologiei. Adaptabil, curios și mereu în mișcare, trăiești pentru experiențe noi. Rutina te sufocă, iar libertatea îți dă aripi. Ai un magnetism natural care atrage oamenii spre tine.',
+    tari: ['Adaptabilitate și flexibilitate', 'Curaj în fața noului', 'Comunicare și charismă', 'Gândire rapidă și creativă', 'Libertate și independență'],
+    slabe: ['Instabilitate și impulsivitate', 'Dificultate în angajamente pe termen lung', 'Risipă de energie', 'Tendința spre exces'],
+    sanatate: 'Sistemul nervos și plămânii. Evită excesele. Mersul în natură te reechilibrează.',
+    bani: 'Banii vin și pleacă rapid. Necesită disciplină financiară. Vânzările și marketingul sunt domenii excelente.',
+    nuFace: ['Nu fugi de responsabilitate', 'Nu te risipești în prea multe direcții', 'Nu lua decizii majore impulsiv'],
+    ritual: 'Scrie zilnic un lucru nou pe care l-ai învățat sau experimentat. Mintea ta cere hrănire constantă.',
+    compat: { bun: [1, 3, 5], mediu: [7, 9], dificil: [2, 4] },
+    planeta: 'Mercur', culoare: 'Turcoaz'
+  },
+  6: {
+    name: 'Îngrijitorul', tagline: 'Iubire. Familie. Abundență.',
+    profil: 'Ești binecuvântarea familiei și a comunității. Iubitor, responsabil și dedicat, aduci armonie și abundență oriunde ești prezent. Cifra 6 este cifra banilor și a prosperității adusă prin iubire și grijă față de ceilalți.',
+    tari: ['Iubire necondiționată și grijă', 'Simț artistic și estetic rafinat', 'Responsabilitate și dăruire', 'Abilitate de a crea armonie', 'Magnetism pentru abundență'],
+    slabe: ['Tendința de a se sacrifica excesiv', 'Perfecționism paralizant', 'Dificultate în a spune NU', 'Dependență de aprecierea celorlalți'],
+    sanatate: 'Inima, rinichii și sistemul hormonal. Îngrijește-te pe tine înainte de a-i îngriji pe alții.',
+    bani: 'Banii vin prin iubire și servicii. Cu cât dai mai mult cu inimă deschisă, cu atât primești mai mult.',
+    nuFace: ['Nu neglija propriile nevoi', 'Nu te sacrifica pentru cei care nu apreciază', 'Nu forța armonia acolo unde nu există'],
+    ritual: 'În fiecare dimineață, pune mâna pe inimă și spune: "Sunt un canal al abundenței și al iubirii."',
+    compat: { bun: [2, 6, 9], mediu: [1, 3], dificil: [5, 7] },
+    planeta: 'Venus', culoare: 'Roz'
+  },
+  7: {
+    name: 'Înțeleptul', tagline: 'Mister. Spiritualitate. Adevăr.',
+    profil: 'Ești căutătorul adevărului din spatele aparențelor. Analitic, intuitiv și profund spiritual, vezi dincolo de ceea ce este vizibil. Mintea ta este ascuțită ca un bisturiu și spiritul tău tânjește mereu după înțelepciune mai profundă.',
+    tari: ['Intuiție și percepție spirituală profundă', 'Gândire analitică excepțională', 'Căutare a adevărului și înțelepciunii', 'Originalitate și gândire independentă', 'Conexiune cu lumea nevăzută'],
+    slabe: ['Tendința spre izolare', 'Hipercriticism față de sine și alții', 'Dificultate în relațiile intime', 'Melancolie și pesimism ocazional'],
+    sanatate: 'Sistemul nervos și glandele. Meditația și liniștea sunt vitale pentru sănătatea ta.',
+    bani: 'Banii vin prin cunoaștere, cercetare și spiritualitate. Nu forța banii — atrage-i prin înțelepciune.',
+    nuFace: ['Nu te izola de lumea din jur', 'Nu fi excesiv de critic', 'Nu ignora latura practică a vieții'],
+    ritual: 'Meditează 7 minute în fiecare dimineață. Scrie întrebarea care te frământă și lasă răspunsul să vină.',
+    compat: { bun: [3, 7, 9], mediu: [4, 5], dificil: [2, 6] },
+    planeta: 'Neptun', culoare: 'Violet'
+  },
+  8: {
+    name: 'Magnetul Puterii', tagline: 'Succes. Abundență. Putere.',
+    profil: 'Ești arhitectul succesului material. Ambiție, putere și viziune — acestea sunt armele tale. Ai capacitatea naturală de a transforma orice situație în oportunitate și de a atrage resursele de care ai nevoie. Banii te urmează pe tine.',
+    tari: ['Ambiție și voință puternică', 'Abilitate de a gestiona resurse mari', 'Viziune pe termen lung', 'Conducere autoritară și eficientă', 'Magnetism pentru succes și abundență'],
+    slabe: ['Tendința spre materialism excesiv', 'Control și dominanță', 'Dificultate în a accepta eșecul', 'Dependență de muncă'],
+    sanatate: 'Inima și sistemul cardiovascular necesită atenție. Evită stresul excesiv.',
+    bani: 'Cel mai puternic număr financiar. Banii vin natural, dar necesită management înțelept.',
+    nuFace: ['Nu sacrifica relațiile pentru succes', 'Nu fi obsedat de control', 'Nu neglija latura spirituală'],
+    ritual: 'Vizualizează zilnic abundența ca pe un flux natural în viața ta. Scrie 3 obiective financiare clare.',
+    compat: { bun: [2, 4, 8], mediu: [6, 9], dificil: [3, 7] },
+    planeta: 'Saturn', culoare: 'Negru/Auriu'
+  },
+  9: {
+    name: 'Înțeleptul Universal', tagline: 'Compasiune. Umanitate. Finalizare.',
+    profil: 'Ești sufletul cel mai evoluat din numerologie. Ai trăit multe, ai suferit mult și din toate ai extras înțelepciune. Compasiunea ta este fără limite și dorința de a ajuta umanitatea te definește. Ești un vindecător prin natura ta.',
+    tari: ['Compasiune și empatie profundă', 'Înțelepciune dobândită prin experiență', 'Generozitate și altruism', 'Viziune holistică asupra lumii', 'Talent artistic și spiritual'],
+    slabe: ['Tendința de a se pierde în visare', 'Dificultate în relații intime', 'Sacrificiu excesiv', 'Sensibilitate la energiile negative'],
+    sanatate: 'Sistemul imunitar și picioarele. Natura și apa te vindecă profund.',
+    bani: 'Banii vin prin serviciu față de alții. Cu cât dai mai mult din inimă, cu atât primești mai mult.',
+    nuFace: ['Nu te lăsa exploatat de cei care abuzează de generozitatea ta', 'Nu neglija propriile nevoi', 'Nu te agăța de trecut'],
+    ritual: 'Zilnic, fă un gest de bunătate față de cineva fără să aștepți nimic în schimb. Aceasta îți amplifică energia.',
+    compat: { bun: [3, 6, 9], mediu: [1, 7], dificil: [4, 8] },
+    planeta: 'Marte', culoare: 'Roșu'
+  },
+  11: {
+    name: 'Numărul Maestru al Intuiției', tagline: 'Iluminare. Inspirație. Misiune divină.',
+    profil: 'Ești purtătorul celui mai puternic număr maestru. Intuiția ta depășește rațiunea obișnuită — simți și percepi dincolo de lumea vizibilă. Ești aici cu o misiune specială: să inspiri și să iluminezi umanitatea. Puterea ta este imensă, dar vine cu responsabilitate uriașă.',
+    tari: ['Intuiție și percepție supranaturală', 'Inspirație și viziune divină', 'Sensibilitate spirituală extremă', 'Charismă și putere de influență', 'Conexiune directă cu sursa universală'],
+    slabe: ['Hipersensibilitate paralizantă', 'Anxietate și tensiune nervoasă', 'Dificultate de a trăi în lumea practică', 'Presiunea misiunii'],
+    sanatate: 'Sistemul nervos este extrem de sensibil. Meditația și grounding-ul sunt esențiale zilnic.',
+    bani: 'Banii vin prin misiune spirituală și inspirarea altora. Autenticitatea ta este cel mai mare activ.',
+    nuFace: ['Nu ignora misiunea ta spirituală', 'Nu te lăsa copleșit de sensibilitate', 'Nu te compara cu ceilalți'],
+    ritual: 'Meditează 11 minute zilnic. Conectează-te cu misiunea ta și cere ghidare divină.',
+    compat: { bun: [2, 11, 22], mediu: [6, 9], dificil: [4, 8] },
+    planeta: 'Uranus', culoare: 'Alb/Argintiu'
+  },
+  22: {
+    name: 'Maestrul Constructor', tagline: 'Cel mai puternic număr din numerologie.',
+    profil: 'Ai cel mai puternic număr maestru — Maestrul Constructor. Ai capacitatea de a manifesta vise grandioase în realitate fizică. Nu ești aici să construiești ceva mic — ești destinat să creezi lucruri care vor schimba lumea. Puterea ta de manifestare este legendară.',
+    tari: ['Capacitate de manifestare fără egal', 'Viziune grandioasă și practică', 'Conducere transformațional', 'Determinare și forță de voință supremă', 'Abilitatea de a construi imperii'],
+    slabe: ['Presiunea enormă a potențialului', 'Tendința spre dependență de muncă extrem', 'Dificultate în relații intime', 'Rigiditate în viziune'],
+    sanatate: 'Tensiunea arterială și sistemul cardiovascular necesită monitorizare. Odihna este vitală.',
+    bani: 'Potențial financiar nelimitat. Construiești sisteme și imperii. Banii urmează viziunea ta.',
+    nuFace: ['Nu te teme de măreția ta', 'Nu construi pe baze false', 'Nu neglija echilibrul dintre muncă și viață'],
+    ritual: 'Scrie zilnic viziunea ta grandioasă. Fă un pas concret spre ea în fiecare zi, oricât de mic.',
+    compat: { bun: [4, 11, 22], mediu: [8, 9], dificil: [3, 5] },
+    planeta: 'Uranus/Saturn', culoare: 'Auriu/Negru'
+  },
+  33: {
+    name: 'Maestrul Vindecător', tagline: 'Cel mai rar și mai sacru număr.',
+    profil: 'Ești purtătorul celui mai rar număr maestru din numerologie. Energia ta de vindecare, iubire și sacrificiu este de natură divină. Ești un far de lumină pentru umanitate — prezența ta vindecă pur și simplu prin existență. Ai venit în această lume cu o misiune sacră de compasiune universală.',
+    tari: ['Energie de vindecare extraordinară', 'Iubire universală și compasiune divină', 'Sacrificiu și dăruire totală', 'Inspirație spirituală pentru mase', 'Conexiune cu divinul'],
+    slabe: ['Sacrificiu excesiv care duce la epuizare', 'Dificultate în a primi iubire', 'Presiunea misiunii sacre', 'Sensibilitate extremă la suferința lumii'],
+    sanatate: 'Inima și sistemul energetic necesită protecție constantă. Grounding și meditație zilnică sunt esențiale.',
+    bani: 'Banii vin prin serviciu sacru față de umanitate. Nu te teme de abundență — ea susține misiunea ta.',
+    nuFace: ['Nu te pierde în suferința altora', 'Nu neglija propriul vas', 'Nu renunța la misiunea ta din frică'],
+    ritual: 'Zilnic, pune mâinile pe inimă și trimite iubire tuturor ființelor. Aceasta îți reîncarcă energia sacră.',
+    compat: { bun: [6, 9, 33], mediu: [11, 22], dificil: [1, 8] },
+    planeta: 'Venus/Neptun', culoare: 'Roz/Auriu'
+  }
+};
+
+const cifraZiNames = {
+  1: 'Liderul', 2: 'Diplomaticul', 3: 'Creatorul', 4: 'Constructorul',
+  5: 'Exploratorul', 6: 'Îngrijitorul', 7: 'Înțeleptul', 8: 'Magnetul',
+  9: 'Universalul', 11: 'Intuitivul', 22: 'Maestrul', 33: 'Vindecătorul'
+};
+
+const lunaNames = {
+  1: 'Inițiere', 2: 'Sensibilitate', 3: 'Creativitate', 4: 'Stabilitate',
+  5: 'Libertate', 6: 'Armonie', 7: 'Reflecție', 8: 'Abundență',
+  9: 'Compasiune', 10: 'Manifestare', 11: 'Iluminare', 12: 'Finalizare'
+};
+
+const compatDesc = {
+  5: '⭐⭐⭐⭐⭐', 4: '⭐⭐⭐⭐', 3: '⭐⭐⭐', 2: '⭐⭐', 1: '⭐'
+};
+
+function getCompatStars(num, myNum) {
+  const p = profiles[myNum] || profiles[reduce(myNum, false)];
+  if (!p) return '⭐⭐⭐';
+  const baseNum = reduce(num, false);
+  const myBase = reduce(myNum, false);
+  if (p.compat.bun.map(n => reduce(n,false)).includes(baseNum)) return '⭐⭐⭐⭐⭐';
+  if (p.compat.mediu.map(n => reduce(n,false)).includes(baseNum)) return '⭐⭐⭐';
+  if (p.compat.dificil.map(n => reduce(n,false)).includes(baseNum)) return '⭐⭐';
+  return '⭐⭐⭐';
+}
+
+function getTodayNumber() {
+  const now = new Date();
+  const zi = now.getDate();
+  const luna = now.getMonth() + 1;
+  const an = now.getFullYear();
+  return reduce(sumDigits(zi) + sumDigits(luna) + sumDigits(an));
+}
+
+function getTodayEnergy(num) {
+  const base = reduce(num, false);
+  const energies = {
+    1: 'Zi de inițiativă și acțiune. Ia decizii importante azi!',
+    2: 'Zi de diplomație și relații. Ascultă-i pe ceilalți.',
+    3: 'Zi creativă și socială. Exprimă-te liber!',
+    4: 'Zi de muncă și organizare. Pune ordine în proiecte.',
+    5: 'Zi de libertate și schimbare. Fii deschis la nou!',
+    6: 'Zi de iubire și familie. Petrece timp cu cei dragi.',
+    7: 'Zi de introspecție și spiritualitate. Meditează.',
+    8: 'Zi de putere și abundență. Fă mișcări financiare.',
+    9: 'Zi de compasiune și finalizare. Încheie ce este neterminat.'
+  };
+  return energies[base] || 'Zi specială cu energie maestru. Atenție la semne!';
+}
+
+function calculeaza() {
+  const zi = parseInt(document.getElementById('ziua').value);
+  const luna = parseInt(document.getElementById('luna').value);
+  const an = parseInt(document.getElementById('an').value);
+  const errorMsg = document.getElementById('errorMsg');
+
+  if (!zi || !luna || !an || an < 1900 || an > 2024) {
+    errorMsg.classList.add('show');
+    return;
+  }
+  errorMsg.classList.remove('show');
+
+  const cifra = getCifraVietii(zi, luna, an);
+  const baseNum = reduce(cifra, false);
+  const isMaster = [11, 22, 33].includes(cifra);
+  const p = profiles[cifra] || profiles[baseNum];
+
+  if (!p) return;
+
+  // Number hero
+  document.getElementById('numBig').textContent = cifra;
+  document.getElementById('numName').textContent = p.name;
+  document.getElementById('numTagline').textContent = p.tagline;
+  document.getElementById('masterBadge').style.display = isMaster ? 'block' : 'none';
+
+  // Master section
+  const masterSection = document.getElementById('masterSection');
+  if (isMaster) {
+    masterSection.style.display = 'block';
+    document.getElementById('masterNumDisplay').textContent = cifra;
+    const masterDescs = {
+      11: 'Ești unul dintre puținii purtători ai lui 11 — Numărul Intuiției Extreme. Simți ce alții nu pot vedea.',
+      22: 'Ești purtătorul lui 22 — cel mai puternic număr maestru. Ești destinat să construiești ceva grandios.',
+      33: 'Ești purtătorul lui 33 — cel mai rar și sacru număr. Misiunea ta este să vindeci și să iubești.'
+    };
+    document.getElementById('masterDesc').textContent = masterDescs[cifra];
+  } else {
+    masterSection.style.display = 'none';
+  }
+
+  // Profile
+  document.getElementById('profilText').textContent = p.profil;
+
+  // Tari
+  const tariEl = document.getElementById('puncteTari');
+  tariEl.innerHTML = p.tari.map(t => `<li>${t}</li>`).join('');
+
+  // Slabe
+  const slabeEl = document.getElementById('puncteSlabe');
+  slabeEl.innerHTML = p.slabe.map(t => `<li>${t}</li>`).join('');
+
+  // Sanatate & Bani
+  document.getElementById('sanatate').textContent = p.sanatate;
+  document.getElementById('bani').textContent = p.bani;
+
+  // Nu face
+  const nuFaceEl = document.getElementById('nuFace');
+  nuFaceEl.innerHTML = p.nuFace.map(t => `<li>${t}</li>`).join('');
+
+  // Ritual
+  document.getElementById('ritual').textContent = p.ritual;
+
+  // Cifra lunii
+  document.getElementById('cifraLunii').textContent = luna;
+  document.getElementById('cifraLuniiText').textContent = lunaNames[luna] || 'Energie lunară';
+
+  // Cifra zilei = cifra universală de azi
+  const todayNum = getTodayNumber();
+  document.getElementById('cifraZilei').textContent = todayNum;
+  document.getElementById('cifraZileiText').textContent = cifraZiNames[todayNum] || 'Energie specială';
+
+  // Compatibilitate
+  const compatGrid = document.getElementById('compatGrid');
+  const compatLabels = {
+    5: 'Suflet pereche 💜',
+    4: 'Foarte bun 💛',
+    3: 'Bun ✨',
+    2: 'Dificil ⚠️',
+    1: 'Provocator 🔥'
+  };
+
+  const allNums = [1,2,3,4,5,6,7,8,9];
+  compatGrid.innerHTML = allNums.map(n => {
+    const stars = getCompatStars(n, baseNum);
+    const starsCount = stars.length;
+    let label = '';
+    if (starsCount >= 5) label = 'Suflet pereche';
+    else if (starsCount === 4) label = 'Foarte bun';
+    else if (starsCount === 3) label = 'Compatibil';
+    else if (starsCount === 2) label = 'Dificil';
+    else label = 'Provocator';
+    return `<div class="compat-item">
+      <span class="compat-num">${n}</span>
+      <span class="compat-stars">${stars}</span>
+      <span class="compat-desc">${label}</span>
+    </div>`;
+  }).join('');
+
+  // Today
+  document.getElementById('todayNum').textContent = todayNum;
+  document.getElementById('todayName').textContent = cifraZiNames[todayNum] || 'Energia Zilei';
+  document.getElementById('todayEnergy').textContent = getTodayEnergy(todayNum);
+
+  // Show results
+  document.getElementById('results').classList.add('show');
+
+  // Scroll to results
+  setTimeout(() => {
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+}
+
+function trimiteEmail() {
+  const cifra = document.getElementById('numBig').textContent;
+  const nume = document.getElementById('numName').textContent;
+  const tagline = document.getElementById('numTagline').textContent;
+  const profil = document.getElementById('profilText').textContent;
+  const sanatate = document.getElementById('sanatate').textContent;
+  const bani = document.getElementById('bani').textContent;
+  const ritual = document.getElementById('ritual').textContent;
+
+  const tari = Array.from(document.querySelectorAll('#puncteTari li')).map(li => '• ' + li.textContent).join('\n');
+  const slabe = Array.from(document.querySelectorAll('#puncteSlabe li')).map(li => '• ' + li.textContent).join('\n');
+  const nuFace = Array.from(document.querySelectorAll('#nuFace li')).map(li => '• ' + li.textContent).join('\n');
+
+  const subject = encodeURIComponent(`Analiza mea numerologică — Cifra ${cifra} — ${nume}`);
+  const body = encodeURIComponent(
+`✦ ANALIZA MEA NUMEROLOGICĂ ✦
+Psihonumerologie · Flori Barcău · Cifrul Vieții
+
+━━━━━━━━━━━━━━━━━━━━
+CIFRA VIEȚII MELE: ${cifra} — ${nume}
+${tagline}
+━━━━━━━━━━━━━━━━━━━━
+
+🔮 PROFIL PSIHOLOGIC:
+${profil}
+
+✨ PUNCTE TARI:
+${tari}
+
+🌙 PUNCTE SLABE:
+${slabe}
+
+💚 SĂNĂTATE:
+${sanatate}
+
+💰 BANI:
+${bani}
+
+🚫 CE SĂ NU FAC:
+${nuFace}
+
+✦ RITUALUL MEU:
+${ritual}
+
+━━━━━━━━━━━━━━━━━━━━
+Psihonumerologie · Flori Barcău · Cifrul Vieții
+━━━━━━━━━━━━━━━━━━━━`
+  );
+
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+}
+</script>
+</body>
+</html>
